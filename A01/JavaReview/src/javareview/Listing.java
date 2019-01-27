@@ -53,6 +53,10 @@ public class Listing {
     
     public String toString()
     {
-        return this._name;
+        if (this._name.equals(" ")) {
+            this._name = "N/A";
+        }
+        
+        return "Name: " + this._name + "\nAge: " + this._age + "\n";
     }
 }
