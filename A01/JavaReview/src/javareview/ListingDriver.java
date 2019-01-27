@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package javareview;
+import java.util.Scanner;
+import java.util.InputMismatchException;
 
 /**
  *
@@ -14,6 +16,9 @@ public class ListingDriver {
          
         //test constructor with no parameters
         Listing noParamsListing = new Listing();
+        String inputName;
+        int inputAge;
+        
         System.out.println("noParamsListing Constructor Test");
         System.out.println("----------------------------");
         System.out.println( noParamsListing.toString());
@@ -37,6 +42,23 @@ public class ListingDriver {
         System.out.println(paramsListing.toString());
         
         //test input
+        Scanner scanUtil = new Scanner(System.in);
+        Listing inputListingTest = new Listing();
         
+        try{
+            //get user input
+            System.out.print("Please enter the name: ");
+            inputName = scanUtil.nextLine();
+            System.out.print("Please enter the age: ");
+            inputAge = scanUtil.nextInt();
+            
+            //pass parameters 
+            inputListingTest.input(inputName, inputAge);
+            System.out.println(inputListingTest.toString());
+            
+        }
+        catch(InputMismatchException ex){
+            System.out.println("Enter a whole number for age: (eg. 24, 3, 1999).");
+        }
     }
 }

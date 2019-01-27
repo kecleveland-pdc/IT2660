@@ -45,18 +45,18 @@ public class Listing {
         _age = age;
     }
     
-    public void input(String name, int age)
+    public void input(String inputName, int inputAge)
     {
-       this._name = name;
-       this._age = age;
+       _name = inputName;
+       _age = inputAge; 
     }
     
     public String toString()
     {
-        if (this._name.equals(" ")) {
-            this._name = "N/A";
+        if (_name.equals(" ")) {
+            _name = "N/A";
         }
         
-        return "Name: " + this._name + "\nAge: " + this._age + "\n";
+        return "Name: " + _name + "\nAge: " + _age + "\n";
     }
 }
