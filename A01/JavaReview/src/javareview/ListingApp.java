@@ -16,7 +16,6 @@ public class ListingApp {
         
         Listing listingsArray[]; 
         Listing reversedArray[];
-        //1. declare arary of three Listings
         listingsArray = new Listing[3];
         Scanner scanUtil = new Scanner(System.in);
         
@@ -26,15 +25,12 @@ public class ListingApp {
         
         while(count <= 2){
             try{
-                //2a. whose conents are input by the user
                 Listing listing = new Listing();
                 System.out.print("Please enter the name: ");
                 userName = scanUtil.nextLine();
                 System.out.print("Please enter the age: ");
                 userAge = Integer.parseInt(scanUtil.nextLine());          
                 listing.input(userName, userAge);
-                
-                //2b. Add to array
                 listingsArray[count] = listing;
                 System.out.println(listingsArray[count].toString());         
             }catch(Exception ex){
@@ -43,8 +39,7 @@ public class ListingApp {
             
             count ++;
         }
-        //3. output in reverse order  
-        //System.out.println("Reverse...");
+        
         reversedArray = getReverseListingArray(listingsArray);
         System.out.println("Reversed....");     
         for(Listing arrayItem : reversedArray ){
@@ -52,32 +47,19 @@ public class ListingApp {
         }
     }
     
-    public static Listing[] getReverseListingArray(Listing listingsArray[])
-    {
-        //reverse algorithm thoughts
-        //1. array2.length == array1.length
-        //2. last element in array1 == array1.length -1
-        //we know we want array2's first element to equal last element in array1 so...            
-            //array1[array.length-1] == array2[0]
-        //that means...
-                //array1[array.length-2] == array2[1]  //2nd elment equal to 2nd to last element in array
-                //array1[array.length-3] == array2[2]  //3rd element equal to 3rd to last element in array
-        // so... if i = 0 and array[i] is the first element in the array
-        //3. for(int i = 0; i<=array1.length-1; i++)
-            //(array2[i] == array1[array.length-1]-i)  == (array2[0] == array1[array.length-1] - 0)
-        
+    public static Listing[] getReverseListingArray(Listing listingsArray[]){    
         Listing reverseArray[];
         reverseArray = new Listing[3];
+        
         try{ 
             for(int i = 0; i <= listingsArray.length-1; i++){
             reverseArray[i] = (listingsArray[(listingsArray.length-1)-i]);
-            //System.out.println(reverseArray[i]);
             }
         }
         catch(Exception ex){
             System.out.println("Error processing: " + ex.toString());
         }
-
+        
         return reverseArray;
     }
 }

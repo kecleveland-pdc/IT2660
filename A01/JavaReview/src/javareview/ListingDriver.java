@@ -54,8 +54,7 @@ public class ListingDriver {
             
             //pass parameters 
             inputListingTest.input(inputName, inputAge);
-            System.out.println(inputListingTest.toString());
-            
+            System.out.println(inputListingTest.toString());  
         }
         catch(InputMismatchException ex){
             System.out.println("Enter a whole number for age: (eg. 24, 3, 1999).");
