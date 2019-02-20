@@ -9,22 +9,22 @@ package studentlistingsapp;
  *
  * @author Keigh
  */
-public class Node {
+public class StudentListing {
     private String _name; //key
     private String _address;
     private String _number;
     
-    public Node (){
+    public StudentListing (){
     
     }
     
-    public Node(String name, String address, String number){
+    public StudentListing(String name, String address, String number){
         _name = name;
         _address = address;
         _number = number;
     }
-    public Node deepCopy(){
-        Node clone = new Node(_name, _address, _number);
+    public StudentListing deepCopy(){
+        StudentListing clone = new StudentListing(_name, _address, _number);
         return clone;
     }
     
