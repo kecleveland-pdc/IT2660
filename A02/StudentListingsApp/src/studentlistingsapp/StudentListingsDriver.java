@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package studentlistingsapp;
-import copy;
 /**
  *
  * @author Keigh
@@ -14,7 +13,7 @@ public class StudentListingsDriver {
          
          Node student = new Node("Keaunna", "Cleveland", "1");
          Node studentDeepCopy = student.deepCopy();
-         Node studentShallowCopy = student.Copy();
+         Node studentShallowCopy = student; //is this a real shallow copy?
          //check values
          System.out.println("Original object: " + student.toString());
          System.out.println("Shallow copied object: " + studentShallowCopy.toString());
@@ -26,5 +25,15 @@ public class StudentListingsDriver {
          System.out.println("Original object: " + student.toString());
          System.out.println("Shallow copied object: " + studentShallowCopy.toString());
          System.out.println("Deep copied object: " + studentDeepCopy.toString());
+         
+         
+         //testing the INSERT AND FETCH methods
+         StudentRecords insertRecord = new StudentRecords();
+         insertRecord.insert(studentDeepCopy);
+         
+         System.out.println("Testing fetch");
+         System.out.println(insertRecord.fetch("Keaunna"));
+         
     }
 }
+
