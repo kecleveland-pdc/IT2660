@@ -54,13 +54,13 @@ public class Node {
         _number = number;
     }
     
-   @Override
-    public String toString(){
-        return "Name is " + _name;
-    }
-    
     public Node deepCopy(){
         Node clone = new Node(_name, _address, _number);
         return clone;
+    }
+    
+    @Override
+    public String toString(){
+        return "Name is " + _name;
     }
 }

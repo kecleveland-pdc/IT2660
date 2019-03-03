@@ -29,6 +29,7 @@ public class StudentRecords
        _size = size;
    }
   
+    //INSERT
    public boolean insert(Node newStudentData) //boolean to return insert result
    {
        if (_next >= _size) //if there is no room to insert bc array is full
@@ -47,16 +48,42 @@ public class StudentRecords
        return true; //insert possible
    }
    
-   public void delete(String targetKey)
+   public boolean delete(String targetKey)
    {
-    
+       int i = 0;
+       
+       while(i < _next && !(_studentData[i].getName().compareTo(targetKey) == 0))
+       {
+           i++; //keep incrementing until finding match
+       }
+       
+       if(i == _next)
+       {
+           return false;
+       }
+       
+       //swap for last position
+       _studentData[i] = _studentData[_next - 1];
+       _studentData[_next - 1] = null; 
+       _next = _next - 1;
+       
+       return true; //deleted
    }
     
-   public void update(Node[] studentArray)
+   public boolean update(String targetKey, Node nodeToUpdate)
    {
-    
+       if (delete(targetKey) == false)
+       {
+           return false; //does not exist
+       }
+       else if (insert(nodeToUpdate) == false)  //thos will perform the deepCopy from nodeToUpdate
+       {
+           return false; //not big enough for new entry
+       }
+       return true; //success
    }
     
+  //FETCH
    public Node fetch(String targetKey)
    {
        Node curNode;
