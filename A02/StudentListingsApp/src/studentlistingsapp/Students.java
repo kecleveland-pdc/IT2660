@@ -10,26 +10,28 @@ package studentlistingsapp;
  * @author Keigh
  */
 public class Students {
-   Node[] studentArray;
+   private Node[] studentArray;
+   private int next;
+   private int size;
   
-    public void insert(Node[] studentArray)
-    {
+   public void insert(Node[] studentArray)
+   {
     
-    }
+   }
    
-    public void delete(Node[] studentArray)
-    {
+   public void delete(Node[] studentArray)
+   {
     
-    }
+   }
     
-    public void update(Node[] studentArray)
-    {
+   public void update(Node[] studentArray)
+   {
     
-    }
+   }
     
-    public int fetch(Node[] studentArray)
-    {
-        return 0; //placeholder
-    }
+   public int fetch(Node[] studentArray)
+   {
+       return 0; //placeholder
+   }
 
 }
