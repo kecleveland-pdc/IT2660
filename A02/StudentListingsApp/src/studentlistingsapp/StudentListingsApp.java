@@ -17,13 +17,13 @@ public class StudentListingsApp {
         
         int maxDataSet = 0;
         int initNumOfStudents = 0;
-        int endProgram = 0;
+        int endProgram = 6;
         String studentDataSet = "";
         
         try
         {
             Run(scanUtil, maxDataSet, initNumOfStudents, studentDataSet);   
-            StudentRecords records = InitStudentRecords(maxDataSet, studentDataSet);
+           // StudentRecords records = InitStudentRecords(maxDataSet, studentDataSet);
             int userInput = 0;
             while(endProgram != userInput)
             {
@@ -37,7 +37,7 @@ public class StudentListingsApp {
                         + "6. Exit the program\n"
                 );
                 userInput = Integer.parseInt(scanUtil.nextLine());
-                runInput(userInput, records);
+                //runInput(userInput, records);
             }
             System.out.println("Exiting...");
             
@@ -68,17 +68,25 @@ public class StudentListingsApp {
     public static StudentRecords InitStudentRecords(int maxDataSet, String studentDataSet)
     {
         StudentRecords studentRecords = new StudentRecords(maxDataSet);
-        String[] students = studentDataSet.split(";");
-        for(String student: students)
+        String[] students = GetStudentDataSet(studentDataSet);
+        try
         {
-            String[] studentData = student.split(",");
-            String name = studentData[0];
-            String address = studentData[1];
-            String number = studentData[2];
+          for(String student: students)
+            {
+                String[] studentData = student.split(",");
+                String name = studentData[0];
+                String address = studentData[1];
+                String number = studentData[2];
             
-            Node studentNode = new Node(name, address, number);
-            studentRecords.insert(studentNode);
+                Node studentNode = new Node(name, address, number);
+                studentRecords.insert(studentNode);
+            }
         }
+        catch(Exception ex)
+        {
+            System.out.println("Error processing: " + ex.toString());
+        }
+      
         
         return studentRecords;
     }
@@ -86,5 +94,18 @@ public class StudentListingsApp {
     public static void runInput (int userInput, StudentRecords records)
     {
     
+    }
+    
+    public static String[] GetStudentDataSet(String studentDataSet)
+    {
+        String data;
+        if(studentDataSet.endsWith(";"))
+        {
+            data = studentDataSet.replaceAll(";$","");
+        }
+        
+        data = studentDataSet;
+        
+        return data.split(";");
     }
 }
