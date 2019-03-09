@@ -9,9 +9,9 @@ package studentlistingsapp;
  * @author Keigh
  */
 public class StudentListingsDriver {
-     public static void main(String[] args) {
+
          
-         Node student = new Node("Keaunna", "Cleveland", "1");
+         /*Node student = new Node("Keaunna", "Cleveland", "1");
          Node studentDeepCopy = student.deepCopy();
          Node studentShallowCopy = student; //is this a real shallow copy?
 
@@ -52,7 +52,6 @@ public class StudentListingsDriver {
          //TESTING UPDATE
           System.out.println("Updating Keaunna");
          insertRecord.update("Keaunna", new Node("Keaunna3", "Cleveland", "4"));
-         System.out.println(insertRecord.fetch("Keaunna3"));
-    }
+         System.out.println(insertRecord.fetch("Keaunna3"));*/
 }
 
