@@ -14,17 +14,30 @@ public class StudentListingsApp {
     public static void main(String[] args) {
     
         Scanner scanUtil = new Scanner(System.in);
-        
         int maxDataSet = 0;
-        int initNumOfStudents = 0;
+        int initNumberOfStudents = 0;
         int endProgram = 6;
         String studentDataSet = "";
         
         try
         {
-            Run(scanUtil, maxDataSet, initNumOfStudents, studentDataSet);   
-           // StudentRecords records = InitStudentRecords(maxDataSet, studentDataSet);
+            System.out.println("Student Records App ");
+            System.out.println("--------------------------------------------------");
+            System.out.println("Please enter the maximum size of the data set: ");
+            maxDataSet = Integer.parseInt(scanUtil.nextLine());
+        
+            System.out.println("Please enter initial number of students: ");
+            initNumberOfStudents = Integer.parseInt(scanUtil.nextLine());   //not needed?
+        
+            System.out.println("Please enter initial student data set in the folllwing format:\nStudentName1,StudentAddress1,StudentNumber1;StudentName2,StudentAddress2,StudentNumber2;...");
+            studentDataSet = scanUtil.nextLine();
+            //System.out.println(initDataSet);
+            
+            StudentRecords records = InitStudentRecords(maxDataSet, studentDataSet);
             int userInput = 0;
+            String targetKey = "";
+            
+            //CLEAN THIS UP IN LESSON 3
             while(endProgram != userInput)
             {
                 System.out.println("Please make a selection: ");
@@ -37,33 +50,39 @@ public class StudentListingsApp {
                         + "6. Exit the program\n"
                 );
                 userInput = Integer.parseInt(scanUtil.nextLine());
-                //runInput(userInput, records);
+                if(userInput == 1)
+                {
+                    System.out.println("Please enter student data to insert in the format StudentName,Address(City),StudentNumber");
+                    targetKey = scanUtil.nextLine();
+                    String[] studentData = targetKey.split(",");
+                    System.out.println(records.insert(new Node(studentData[0], studentData[1], studentData[2])));
+                }else if(userInput == 2)
+                {
+                    System.out.println("Please enter a student to fetch");
+                    targetKey = scanUtil.nextLine();
+                    System.out.println(records.fetch(targetKey).toString());
+                }else if(userInput == 3)
+                {
+                    System.out.println("Please enter a student to delete");
+                    targetKey = scanUtil.nextLine();
+                    System.out.println(records.delete(targetKey));
+                    System.out.println("Deleted " + targetKey);
+                }else if(userInput == 4)
+                {
+                
+                }else if(userInput == 5)
+                {
+                
+                }else if((userInput !=6 && userInput < 5))
+                {
+                    System.out.println("Please choose an appropriate number");
+                }
+                //some exit strategy
             }
-            System.out.println("Exiting...");
-            
          }catch(Exception ex){
             System.out.println("Error processing: " + ex.toString());
          }
     }     
-    
-    public static void Run(Scanner scanUtil, int maxDataSet, int initNumberOfStudents, String studentDataSet)
-    {
-
-        String initDataSet;
-        System.out.println("Student Records App ");
-        System.out.println("--------------------------------------------------");
-        System.out.println("Please enter the maximum size of the data set: ");
-        maxDataSet = Integer.parseInt(scanUtil.nextLine());
-        
-        System.out.println("Please enter initial number of students: ");
-        initNumberOfStudents = Integer.parseInt(scanUtil.nextLine());   
-        
-        System.out.println("Please enter initial student data set in the folllwing format: ");
-        System.out.println("StudentName1,StudentAddress1,StudentNumber1;StudentName2,StudentAddress2,StudentNumber2;...");
-        initDataSet = scanUtil.nextLine();
-        //System.out.println(initDataSet);
-    
-    }
     
     public static StudentRecords InitStudentRecords(int maxDataSet, String studentDataSet)
     {
@@ -85,15 +104,8 @@ public class StudentListingsApp {
         catch(Exception ex)
         {
             System.out.println("Error processing: " + ex.toString());
-        }
-      
-        
+        }    
         return studentRecords;
-    }
-    
-    public static void runInput (int userInput, StudentRecords records)
-    {
-    
     }
     
     public static String[] GetStudentDataSet(String studentDataSet)
