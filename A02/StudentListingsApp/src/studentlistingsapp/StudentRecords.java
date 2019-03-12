@@ -76,7 +76,7 @@ public class StudentRecords
        {
            return false; //does not exist
        }
-       else if (insert(nodeToUpdate) == false)  //thos will perform the deepCopy from nodeToUpdate
+       else if (insert(nodeToUpdate) == false)  //this will perform the deepCopy from nodeToUpdate
        {
            return false; //not big enough for new entry
        }
@@ -113,5 +113,10 @@ public class StudentRecords
            
        return curNode; //placeholder
    }
-
+   
+   @Override
+    public String toString(){
+        //sorted records
+        return "";
+    }
 }

@@ -37,7 +37,7 @@ public class StudentListingsApp {
             int userInput = 0;
             String targetKey = "";
             
-            //CLEAN THIS UP IN LESSON 3
+            ////CLEAN THIS UP IN LESSON 3 -- 3/11/2019////
             while(endProgram != userInput)
             {
                 System.out.println("Please make a selection: ");
@@ -55,7 +55,8 @@ public class StudentListingsApp {
                     System.out.println("Please enter student data to insert in the format StudentName,Address(City),StudentNumber");
                     targetKey = scanUtil.nextLine();
                     String[] studentData = targetKey.split(",");
-                    System.out.println(records.insert(new Node(studentData[0], studentData[1], studentData[2])));
+                    records.insert(new Node(studentData[0], studentData[1], studentData[2]));
+                    System.out.println("Inserted " + records.fetch(studentData[0]));
                 }else if(userInput == 2)
                 {
                     System.out.println("Please enter a student to fetch");
@@ -65,20 +66,26 @@ public class StudentListingsApp {
                 {
                     System.out.println("Please enter a student to delete");
                     targetKey = scanUtil.nextLine();
+                    System.out.println("Deleting " + records.fetch(targetKey).toString());
                     System.out.println(records.delete(targetKey));
-                    System.out.println("Deleted " + targetKey);
+                    System.out.println("Deleted " + targetKey + "\n");
                 }else if(userInput == 4)
                 {
-                
+                    System.out.println("Please enter a student to update, in the following format:  Student1,UpdatedStudent1Name,UpdatedStuden1tAddress,UpdatedStudent1Number");
+                    targetKey = scanUtil.nextLine();
+                    String[] studentData = targetKey.split(",");
+                    System.out.println(records.update(studentData[0], new Node(studentData[1],studentData[2],studentData[3])));
+                    System.out.println("Updated " + studentData[0] + "\n" + records.fetch(studentData[1]).toString());
                 }else if(userInput == 5)
                 {
-                
-                }else if((userInput !=6 && userInput < 5))
-                {
-                    System.out.println("Please choose an appropriate number");
+                    //sort and get all records
                 }
-                //some exit strategy
+                else if((userInput !=6 && userInput < 5))
+                {
+                    System.out.println("Please choose an appropriate selection");
+                }
             }
+            System.out.println("Exiting...");
          }catch(Exception ex){
             System.out.println("Error processing: " + ex.toString());
          }

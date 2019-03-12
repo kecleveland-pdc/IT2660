@@ -61,6 +61,6 @@ public class Node {
     
     @Override
     public String toString(){
-        return "Name is " + _name;
+        return "Student Name: " + _name + " StudentAddress: " + _address + " StudentNumber: " + _number;
     }
 }
