@@ -67,14 +67,14 @@ public class StudentListingsApp {
                     System.out.println("Please enter a student to delete");
                     targetKey = scanUtil.nextLine();
                     System.out.println("Deleting " + records.fetch(targetKey).toString());
-                    System.out.println(records.delete(targetKey));
+                    //System.out.println(records.delete(targetKey));
                     System.out.println("Deleted " + targetKey + "\n");
                 }else if(userInput == 4)
                 {
                     System.out.println("Please enter a student to update, in the following format:  Student1,UpdatedStudent1Name,UpdatedStuden1tAddress,UpdatedStudent1Number");
                     targetKey = scanUtil.nextLine();
                     String[] studentData = targetKey.split(",");
-                    System.out.println(records.update(studentData[0], new Node(studentData[1],studentData[2],studentData[3])));
+                    //System.out.println(records.update(studentData[0], new Node(studentData[1],studentData[2],studentData[3])));
                     System.out.println("Updated " + studentData[0] + "\n" + records.fetch(studentData[1]).toString());
                 }else if(userInput == 5)
                 {

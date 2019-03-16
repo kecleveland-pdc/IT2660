@@ -59,6 +59,11 @@ public class Node {
         return clone;
     }
     
+   public int compareTo(String targetKey)
+   {
+       return(_name.compareTo(targetKey));
+   }
+       
     @Override
     public String toString(){
         return "Student Name: " + _name + " StudentAddress: " + _address + " StudentNumber: " + _number;

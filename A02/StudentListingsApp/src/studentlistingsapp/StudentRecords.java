@@ -29,8 +29,117 @@ public class StudentRecords
        _size = size;
    }
   
-    //INSERT
-   public boolean insert(Node newStudentData) //boolean to return insert result
+    //INSERT -- SHOULD SORT ON INSERT
+   public boolean insert(Node newStudentData)
+   {
+       int low = 0;
+       int high = _next - 1;
+       int i = (low + high)/2;
+       
+       while(newStudentData.getName() != _studentData[i].getName())
+       {
+           if(newStudentData.getName().compareTo(_studentData[i].getName()) < 0 && high != low)
+           {
+               high = 1 - 1;
+           }else
+           {
+              i = (low + high)/2;     
+           }
+        }
+       _studentData[i].deepCopy();
+   }
+    
+   public Node fetch(String targetKey)
+   {
+       int low = 0;
+       int high = _next - 1;
+       int i = (low + high)/2;
+       
+       while(!(targetKey.equals(_studentData[i].getName())))
+       {
+           //if((targetKey.compareTo(_studentData[i].getName()&& high != low)
+           if((targetKey.compareTo(_studentData[i].getName()) < 0) && high != low)
+           {
+               high = 1 - 1;
+           }else
+           {
+              i = (low + high)/2;     
+           }
+        }
+       return _studentData[i].deepCopy();
+   }
+   
+    public boolean delete(String targetKey)
+   {
+       int low = 0;
+       int high = _next - 1;
+       int i = (low + high)/2;
+       
+       while(!(targetKey.equals(_studentData[i].getName())) && high != low)
+       {
+           if(targetKey.compareTo(_studentData[i].getName()) < 0)
+           {
+               high = i - 1;
+           }else
+           {
+               low = i + 1;
+           }
+           
+           i = (low = high) / 2;
+       }
+       
+       //move references up
+       for(int j = 1; j < _next-1; j++)
+       {
+           _studentData[j] = _studentData[j + 1];
+       }
+
+       _next = _next - 1;
+       _studentData[_next ] = null; 
+       
+       return true; //deleted
+   }
+   
+   @Override
+    public String toString(){
+        //sorted records
+        return "";
+    }
+    
+    
+    ///***BEGIN UNSORTED FUNCTIONS - NOTES***///
+      
+    //FETCH UNSORTED
+   /*public Node fetch(String targetKey)
+   {
+       Node curNode;
+       Node tempNode;
+       
+       int i = 0; //starting
+       
+       while(i < _next && !(_studentData[i].getName().compareTo(targetKey) == 0))
+       {
+           i++;
+       }
+       
+       if (i == _next)
+       {
+           return null;
+       }
+       
+       curNode = _studentData[i].deepCopy(); //deep copy
+       
+       if(i !=0)
+       {
+          //swapping function
+         tempNode = _studentData[i-1];    //tempNode = _studentData[i-1]; --> tempNode = _studentData[1-1]; == _studentData[0]  
+         _studentData[i-1] = _studentData[i]; // _studentData[0]  = _studentData[1] 
+         _studentData[i] = tempNode;  // _studentData[1] = tempNode[0]
+       }
+           
+       return curNode; //placeholder
+    
+    public boolean insert(Node newStudentData) //boolean to return insert result
    {
        if (_next >= _size) //if there is no room to insert bc array is full
        {
@@ -82,41 +191,6 @@ public class StudentRecords
        }
        return true; //success
    }
-    
-  //FETCH
-   public Node fetch(String targetKey)
-   {
-       Node curNode;
-       Node tempNode;
-       
-       int i = 0; //starting
-       
-       while(i < _next && !(_studentData[i].getName().compareTo(targetKey) == 0))
-       {
-           i++;
-       }
-       
-       if (i == _next)
-       {
-           return null;
-       }
-       
-       curNode = _studentData[i].deepCopy(); //deep copy
-       
-       if(i !=0)
-       {
-          //swapping function
-         tempNode = _studentData[i-1];    //tempNode = _studentData[i-1]; --> tempNode = _studentData[1-1]; == _studentData[0]  
-         _studentData[i-1] = _studentData[i]; // _studentData[0]  = _studentData[1] 
-         _studentData[i] = tempNode;  // _studentData[1] = tempNode[0]
-       }
-           
-       return curNode; //placeholder
-   }
+   }*/
    
-   @Override
-    public String toString(){
-        //sorted records
-        return "";
-    }
 }
