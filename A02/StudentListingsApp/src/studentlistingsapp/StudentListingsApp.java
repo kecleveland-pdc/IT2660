@@ -14,29 +14,24 @@ public class StudentListingsApp {
     public static void main(String[] args) {
     
         Scanner scanUtil = new Scanner(System.in);
-        int maxDataSet = 0;
-        int initNumberOfStudents = 0;
-        int endProgram = 6;
+        String targetKey = "";
         String studentDataSet = "";
-        
+        int maxDataSet = 0;
+        int endProgram = 6;
+        int userInput = 0;
+
         try
         {
             System.out.println("Student Records App ");
             System.out.println("--------------------------------------------------");
             System.out.println("Please enter the maximum size of the data set: ");
             maxDataSet = Integer.parseInt(scanUtil.nextLine());
-        
-            System.out.println("Please enter initial number of students: ");
-            initNumberOfStudents = Integer.parseInt(scanUtil.nextLine());   //not needed?
-        
+     
             System.out.println("Please enter initial student data set in the folllwing format:\nStudentName1,StudentAddress1,StudentNumber1;StudentName2,StudentAddress2,StudentNumber2;...");
             studentDataSet = scanUtil.nextLine();
-            //System.out.println(initDataSet);
-            
             StudentRecords records = InitStudentRecords(maxDataSet, studentDataSet);
-            int userInput = 0;
-            String targetKey = "";
-            
+            System.out.println("Initial data set\n" + records.toString());
+           
             ////CLEAN THIS UP IN LESSON 3 -- 3/11/2019////
             while(endProgram != userInput)
             {
@@ -55,27 +50,27 @@ public class StudentListingsApp {
                     System.out.println("Please enter student data to insert in the format StudentName,Address(City),StudentNumber");
                     targetKey = scanUtil.nextLine();
                     String[] studentData = targetKey.split(",");
-                    records.insert(new Node(studentData[0], studentData[1], studentData[2]));
-                    System.out.println("Inserted " + records.fetch(studentData[0]));
+                    records.Insert(new Node(studentData[0], studentData[1], studentData[2]));
+                    //System.out.println("Inserted " + records.Fetch(studentData[0]));
                 }else if(userInput == 2)
                 {
                     System.out.println("Please enter a student to fetch");
                     targetKey = scanUtil.nextLine();
-                    System.out.println(records.fetch(targetKey).toString());
+                   // System.out.println(records.Fetch(targetKey).toString());
                 }else if(userInput == 3)
                 {
                     System.out.println("Please enter a student to delete");
                     targetKey = scanUtil.nextLine();
-                    System.out.println("Deleting " + records.fetch(targetKey).toString());
-                    //System.out.println(records.delete(targetKey));
+                   // System.out.println("Deleting " + records.Fetch(targetKey).toString());
+                   // records.Delete(targetKey);
                     System.out.println("Deleted " + targetKey + "\n");
                 }else if(userInput == 4)
                 {
                     System.out.println("Please enter a student to update, in the following format:  Student1,UpdatedStudent1Name,UpdatedStuden1tAddress,UpdatedStudent1Number");
                     targetKey = scanUtil.nextLine();
                     String[] studentData = targetKey.split(",");
-                    //System.out.println(records.update(studentData[0], new Node(studentData[1],studentData[2],studentData[3])));
-                    System.out.println("Updated " + studentData[0] + "\n" + records.fetch(studentData[1]).toString());
+                    //System.out.println(records.Update(studentData[0], new Node(studentData[1],studentData[2],studentData[3])));
+                   // System.out.println("Updated " + studentData[0] + "\n" + records.Fetch(studentData[1]).toString());
                 }else if(userInput == 5)
                 {
                     //sort and get all records
@@ -105,7 +100,7 @@ public class StudentListingsApp {
                 String number = studentData[2];
             
                 Node studentNode = new Node(name, address, number);
-                studentRecords.insert(studentNode);
+                studentRecords.Insert(studentNode);
             }
         }
         catch(Exception ex)

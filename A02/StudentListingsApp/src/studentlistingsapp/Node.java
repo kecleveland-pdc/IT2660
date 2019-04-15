@@ -61,7 +61,8 @@ public class Node {
     
    public int compareTo(String targetKey)
    {
-       return(_name.compareTo(targetKey));
+        return(_name.compareTo(targetKey));
+
    }
        
     @Override
