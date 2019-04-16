@@ -23,8 +23,8 @@ public class RestrictedDataStructures {
         Listing popped;
         
         //checking underflow & overflow
-        System.out.println(stack.checkUnderflow());
-        System.out.println(stack.checkOverflow());
+        System.out.println(stack.isEmpty());
+        System.out.println(stack.isFull());
         
         //pushing on stack
         stack.push(li);
@@ -43,6 +43,8 @@ public class RestrictedDataStructures {
         
         //peeking
         System.out.println("Peeking..." + stack.peek());
+        System.out.println(stack.isEmpty());
+        System.out.println(stack.isFull());
         
     }
     

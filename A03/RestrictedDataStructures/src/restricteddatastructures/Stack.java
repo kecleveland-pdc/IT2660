@@ -64,24 +64,24 @@ public class Stack {
         _top = -1;
     }
     
-    public String checkUnderflow()
+    public Boolean isEmpty()
     {
         if(_top == -1)
         {
-            return "The stack is empty. A pop operation on this stack will result in an underflow condition.";
+            return true;
         }
         
-        return "The stack is not empty. A pop operation on this stack will not result in an underflow condition.";
+        return false;
     }
     
-    public String checkOverflow()
+    public Boolean isFull()
     {
         if(_top == _size-1)
         {
-            return "The stack is full. A push operation on this stack will result in an overflow condition.";
+            return true;
         }
         
-        return "The stack is not full. A push operation on this stack will not result in an overflow condition";
+        return false;
     }
     
     public Listing peek()
