@@ -9,19 +9,19 @@ package linkedlistapp;
  *
  * @author Keigh
  */
-public class Listing {
+public class Node {
     private String _name;
     private String _number;
     private String _address;
     
-    public Listing()
+    public Node()
     {
         _name = "";
         _address = "";
         _number = "";
     }
     
-    public Listing(String name, String number, String address)
+    public Node(String name, String number, String address)
     {
         _name = name;
         _number = number;
@@ -48,19 +48,23 @@ public class Listing {
         _number = number;
     }
     
-    @Override
-    public String toString()
-    {
-        if (_name.equals(" ")) {
-            _name = "N/A";
-        }
-        
-        return "Name: " + _name +"\n";
-    }
+    public int compareTo(String targetKey)
+   {
+        return(_name.compareTo(targetKey));
+
+   }
     
-    public Listing deepCopy()
+    public Node deepCopy()
     {
-        Listing clone = new Listing(_name, _address, _number);
+        Node clone = new Node(_name, _address, _number);
         return clone;
     }
+       
+    @Override
+    public String toString(){
+        return "Student Name: " + _name 
+                + " StudentAddress: " + _address 
+                + " StudentNumber: " + _number;
+    }
+  
 }
