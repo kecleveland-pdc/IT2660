@@ -38,15 +38,34 @@ public class Queue {
         
         if(_numOfNodes == _size)
         {
-            return false;
+            //new array
+            _size = _size + 1;
+            _numOfNodes = 0;
+            _front = 0;
+            _rear = 0;
+            
+            Listing[] larger = new Listing[_size];  
+            Listing temp[] = _data;
+            
+            _data = larger;
+            
+            for(int i = 0; i <= temp.length-1; i++)
+            {
+                _numOfNodes = _numOfNodes + 1;
+                _data[i] = temp[i];
+                _rear = (_rear + 1) % _size;
+                
+            }
+            
+            temp = null;
+            larger = null; 
         }
-        else
-        {
-            _numOfNodes = _numOfNodes + 1;
-            _data[_rear] = newNode.deepCopy();
-            _rear = (_rear + 1) % _size;
-             return true;
-        }
+ 
+        _numOfNodes = _numOfNodes + 1;
+        _data[_rear] = newNode.deepCopy(); //now can insert the new node at the rear
+        _rear = (_rear + 1) % _size;  //rear will properly be set for next enqueue
+            
+        return true;
     }
     
     public Listing deque()
