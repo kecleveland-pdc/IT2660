@@ -25,7 +25,8 @@ public class Stack {
     {
         if(_top == _size - 1)
         {
-            Listing[] larger = new Listing[_size+1];
+            _size = _size+1;
+            Listing[] larger = new Listing[_size];
             
             ///expand stack
             Listing temp[] = _data;
@@ -38,9 +39,10 @@ public class Stack {
             temp = null;
             larger = null;  
         }
-
+       
+        _data[_top+1] = newNode.deepCopy();
         _top = _top + 1;
-        _data[_top] = newNode.deepCopy();
+        
         return true;
     }
     

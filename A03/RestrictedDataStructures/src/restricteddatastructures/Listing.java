@@ -21,11 +21,11 @@ public class Listing {
         _number = "";
     }
     
-    public Listing(String name, String number, String address)
+    public Listing(String name, String address, String number)
     {
         _name = name;
-        _number = number;
         _address = address;
+        _number = number;
     }
     
     public String getName()
@@ -55,7 +55,9 @@ public class Listing {
             _name = "N/A";
         }
         
-        return "Name: " + _name +"\n";
+        return "Name: " + _name +"\n" 
+                + "Address: " + _address + "\n" 
+                + "Number: " + _number + "\n";
     }
     
     public Listing deepCopy()
