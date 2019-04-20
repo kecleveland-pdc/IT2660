@@ -10,5 +10,11 @@ package linkedlistapp;
  * @author Keigh
  */
 public class LinkedListDriver {
+    public static void main(String[] args) {
+        
+        SinglyLinkedList list = new SinglyLinkedList();
+        list.insert(new Listing("Keaunna", "222 2222", "123 Sesame Street"));
+        list.showAll();
+    }
     
 }

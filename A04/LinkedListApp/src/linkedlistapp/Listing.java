@@ -4,24 +4,24 @@
  * and open the template in the editor.
  */
 package linkedlistapp;
-
+import javax.swing.*;  
 /**
  *
  * @author Keigh
  */
-public class Node {
+public class Listing {
     private String _name;
     private String _number;
     private String _address;
     
-    public Node()
+    public Listing()
     {
         _name = "";
-        _address = "";
         _number = "";
+        _address = "";
     }
     
-    public Node(String name, String number, String address)
+    public Listing(String name, String number, String address)
     {
         _name = name;
         _number = number;
@@ -54,17 +54,24 @@ public class Node {
 
    }
     
-    public Node deepCopy()
+    public Listing deepCopy()
     {
-        Node clone = new Node(_name, _address, _number);
+        Listing clone = new Listing(_name, _address, _number);
         return clone;
+    }
+    
+    public void input()
+    {
+        _name = JOptionPane.showInputDialog("Enter a name: ");
+        _address = JOptionPane.showInputDialog("Enter an number");
+        _number = JOptionPane.showInputDialog("Enter an address");     
     }
        
     @Override
     public String toString(){
         return "Student Name: " + _name 
-                + " StudentAddress: " + _address 
-                + " StudentNumber: " + _number;
+                + "\nStudentNumber: " + _number
+                + "\nStudentAddress: " + _address;       
     }
   
 }
