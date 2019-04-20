@@ -56,7 +56,7 @@ public class Listing {
     
     public Listing deepCopy()
     {
-        Listing clone = new Listing(_name, _address, _number);
+        Listing clone = new Listing(_name, _number, _address);
         return clone;
     }
     
@@ -69,7 +69,7 @@ public class Listing {
        
     @Override
     public String toString(){
-        return "Student Name: " + _name 
+        return "\nStudent Name: " + _name 
                 + "\nStudentNumber: " + _number
                 + "\nStudentAddress: " + _address;       
     }

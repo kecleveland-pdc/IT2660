@@ -58,7 +58,7 @@ public class SinglyLinkedList {
     {
         Node q = _h;
         Node p = _h.next;
-        while (p != null && p.l.compareTo(targetKey) == 0)
+        while (p != null && !(p.l.compareTo(targetKey) == 0))
         {
             q = p;
             p = p.next;
