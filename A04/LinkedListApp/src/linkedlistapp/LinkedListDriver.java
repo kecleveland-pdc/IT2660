@@ -13,14 +13,14 @@ public class LinkedListDriver {
     public static void main(String[] args) {
         
         SinglyLinkedList list = new SinglyLinkedList();
-        list.insert(new Listing("Keaunna", "222 2222", "123 Sesame Street"));  
+        list.insert(new Listing("Keaunna", "1", "3.4"));  
         System.out.println("Here is the initial list:");
         list.showAll();
         
         //inserting 
         System.out.println("------------------------------");
         System.out.println("Inserting Miyaunna's record...");
-        list.insert(new Listing("Miyaunna", "111 1111", "123 Sesame Street"));
+        list.insert(new Listing("Miyaunna", "2", "3.9"));
         System.out.println("Here is the new list: ");
         list.showAll();
         
@@ -32,7 +32,7 @@ public class LinkedListDriver {
         //update
         System.out.println("------------------------------");
         System.out.println("Updating 'Keaunna' to 'Keigh'...");
-        list.update("Keaunna", new Listing("Keigh", "222 2222", "123 Sesame Street"));
+        list.update("Keaunna", new Listing("Keigh", "1", "3.7"));
         System.out.println("Here is the new list: ");
         list.showAll();
         

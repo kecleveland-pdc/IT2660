@@ -12,20 +12,20 @@ import javax.swing.*;
 public class Listing {
     private String _name;
     private String _number;
-    private String _address;
+    private String _studentGPA;
     
     public Listing()
     {
         _name = "";
         _number = "";
-        _address = "";
+        _studentGPA = "";
     }
     
     public Listing(String name, String number, String address)
     {
         _name = name;
         _number = number;
-        _address = address;
+        _studentGPA = address;
     }
     
     public String getName()
@@ -56,22 +56,22 @@ public class Listing {
     
     public Listing deepCopy()
     {
-        Listing clone = new Listing(_name, _number, _address);
+        Listing clone = new Listing(_name, _number, _studentGPA);
         return clone;
     }
     
     public void input()
     {
         _name = JOptionPane.showInputDialog("Enter a name: ");
-        _address = JOptionPane.showInputDialog("Enter an number");
+        _studentGPA = JOptionPane.showInputDialog("Enter an number");
         _number = JOptionPane.showInputDialog("Enter an address");     
     }
        
     @Override
     public String toString(){
         return "\nStudent Name: " + _name 
-                + "\nStudentNumber: " + _number
-                + "\nStudentAddress: " + _address;       
+                + "\nStudent Number: " + _number
+                + "\nGPA: " + _studentGPA;       
     }
   
 }
