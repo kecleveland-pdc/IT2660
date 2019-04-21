@@ -9,27 +9,35 @@ package restricteddatastructures;
  *
  * @author Keigh
  */
-public class Stack {
-    private Listing[] _data;
+public class GenericStack<T> {
+    private T[] _data;
     private int _top;
     private int _size;
     
-    public Stack (int n)
+     public GenericStack ()
+    {
+        _top = -1;
+        _size = 100;
+        _data = (T[]) new Object[100];
+    }
+     
+    public GenericStack (int n)
     {
         _top = -1;
         _size = n;
-        _data = new Listing[n];
+        _data = (T[]) new Object[n];
     }
-    
-    public boolean push(Listing newNode)
+   
+    public boolean push(T newNode)
     {
+        GenericNode node = (GenericNode) newNode;
         if(_top == _size - 1)
         {
             _size = _size+1;
-            Listing[] larger = new Listing[_size];
+            T[] larger = (T[]) new Object[_size];
             
             ///expand stack
-            Listing temp[] = _data;
+            T temp[] = _data;
             _data = larger;
             for(int i = 0; i <= temp.length-1; i++)
             {
@@ -40,13 +48,13 @@ public class Stack {
             larger = null;  
         }
        
-        _data[_top+1] = newNode.deepCopy();
+        _data[_top + 1] = (T)node.deepCopy();
         _top = _top + 1;
         
         return true;
     }
     
-    public Listing pop()
+    public T pop()
     {
         int topLocation;
         if(_top == -1)
@@ -86,7 +94,7 @@ public class Stack {
         return false;
     }
     
-    public Listing peek()
+    public T peek()
     {
         int topLocation;
         if(_top == -1)
@@ -106,5 +114,11 @@ public class Stack {
         {
             System.out.println(_data[i].toString());
         }
+    }
+    
+    public interface GenericNode
+    {
+        public abstract GenericNode deepCopy();
+        public abstract String toString();
     }
 }

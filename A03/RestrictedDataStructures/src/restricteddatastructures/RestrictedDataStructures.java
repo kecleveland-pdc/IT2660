@@ -15,16 +15,16 @@ public class RestrictedDataStructures {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Stack stack = new Stack(2);
-        Queue queue = new Queue(2); 
+        GenericStack stack = new GenericStack(2);
+        GenericQueue queue = new GenericQueue(2); 
         
         Listing li = new Listing("Keaunna", "123 Street", "123 1111");
         Listing li2 = new Listing("Miya", "111 Street", "123 0000");
         Listing li3 = new Listing("Sharlene", "456 Street", "123 4444");
         Listing li4 = new Listing("Expander", "000 Street", "000 0000");
         
-        Listing popped;
-        Listing dequed;
+        Object popped;
+        Object dequed;
         
         System.out.println("Now working with the STACK:");
         System.out.println("Is the stack empty? " + stack.isEmpty());
