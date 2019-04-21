@@ -4,28 +4,28 @@
  * and open the template in the editor.
  */
 package linkedlistapp;
-
+import javax.swing.*;  
 /**
  *
  * @author Keigh
  */
-public class Listing {
+public class Listing implements GenericSinglyLinkedList.GenericNode {
     private String _name;
     private String _number;
-    private String _address;
+    private String _studentGPA;
     
     public Listing()
     {
         _name = "";
-        _address = "";
         _number = "";
+        _studentGPA = "";
     }
     
     public Listing(String name, String number, String address)
     {
         _name = name;
         _number = number;
-        _address = address;
+        _studentGPA = address;
     }
     
     public String getName()
@@ -49,18 +49,31 @@ public class Listing {
     }
     
     @Override
-    public String toString()
-    {
-        if (_name.equals(" ")) {
-            _name = "N/A";
-        }
-        
-        return "Name: " + _name +"\n";
-    }
+    public int compareTo(String targetKey)
+   {
+        return(_name.compareTo(targetKey));
+
+   }
     
+    @Override
     public Listing deepCopy()
     {
-        Listing clone = new Listing(_name, _address, _number);
+        Listing clone = new Listing(_name, _number, _studentGPA);
         return clone;
     }
+    
+    public void input()
+    {
+        _name = JOptionPane.showInputDialog("Enter a name: ");
+        _studentGPA = JOptionPane.showInputDialog("Enter an number");
+        _number = JOptionPane.showInputDialog("Enter an address");     
+    }
+       
+    @Override
+    public String toString(){
+        return "\nStudent Name: " + _name 
+                + "\nStudent Number: " + _number
+                + "\nGPA: " + _studentGPA;       
+    }
+  
 }
