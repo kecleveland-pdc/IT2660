@@ -9,10 +9,10 @@ package linkedlistapp;
  *
  * @author Keigh
  */
-public class GenericSinglyLinkedList<T> {
+public class GenericSLL<T> {
     private Node _h;
     
-    public GenericSinglyLinkedList()
+    public GenericSLL()
     {
         _h = new Node();
         _h.l = null; //Listing or other type
@@ -21,6 +21,8 @@ public class GenericSinglyLinkedList<T> {
     
     public boolean insert(T newNode)
     {
+        //TODO: Check for already inserted key
+        
         GenericNode node = (GenericNode) newNode; //cast newNode to GenericNode
         Node n = new Node();
         if(n == null)
