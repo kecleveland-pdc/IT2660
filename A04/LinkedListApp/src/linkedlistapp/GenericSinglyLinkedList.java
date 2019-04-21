@@ -9,18 +9,19 @@ package linkedlistapp;
  *
  * @author Keigh
  */
-public class SinglyLinkedList {
+public class GenericSinglyLinkedList<T> {
     private Node _h;
     
-    public SinglyLinkedList()
+    public GenericSinglyLinkedList()
     {
         _h = new Node();
-        _h.l = null;
-        _h.next = null;
+        _h.l = null; //Listing or other type
+        _h.next = null; 
     }
     
-    public boolean insert(Listing newListing)
+    public boolean insert(T newNode)
     {
+        GenericNode node = (GenericNode) newNode; //cast newNode to GenericNode
         Node n = new Node();
         if(n == null)
         {
@@ -30,23 +31,29 @@ public class SinglyLinkedList {
         {
             n.next = _h.next;
             _h.next = n;
-            n.l = newListing.deepCopy();
+            n.l = (T)node.deepCopy();
             return true; 
         }
     }
     
-    public Listing fetch(String targetKey)
+    public T fetch(String targetKey)
     {
+        //cast newNode to GenericNode
         Node p = _h.next;
-        while(p!= null && !(p.l.compareTo(targetKey) == 0))
-        {
+        GenericNode node = (GenericNode) p.l; 
+        
+        while(p != null && !(node.compareTo(targetKey) == 0))
+        { 
             p = p.next;
+            node = (GenericNode) p.l; 
             
         }
         
         if(p != null)
         {
-            return p.l.deepCopy();
+            //return p.l.deepCopy();
+            return (T)node.deepCopy();
+
         }
         else
         {
@@ -58,10 +65,12 @@ public class SinglyLinkedList {
     {
         Node q = _h;
         Node p = _h.next;
-        while (p != null && !(p.l.compareTo(targetKey) == 0))
+        GenericNode node = (GenericNode) p.l; 
+        while (p != null && !(node.compareTo(targetKey) == 0))
         {
             q = p;
             p = p.next;
+            node = (GenericNode) p.l; 
         }
         if(p != null)
         {
@@ -74,13 +83,13 @@ public class SinglyLinkedList {
         }
     }
     
-    public boolean update(String targetKey, Listing newListing)
+    public boolean update(String targetKey, T newNode)
     {
         if(delete(targetKey) == false)
         {
             return false;
         }
-        else if(insert(newListing) == false)
+        else if(insert(newNode) == false)
         {
             return false;
         }
@@ -91,20 +100,30 @@ public class SinglyLinkedList {
     public void showAll()
     {
         Node p = _h.next;
+        
         while(p != null)
         {
-            System.out.println(p.l.toString());
+            GenericNode node = (GenericNode) p.l; 
+            System.out.println(node.toString());
             p = p.next;
         }
     }
     
     public class Node
     {
-        private Listing l;
+        
+        private T l;
         private Node next;
         
         public Node()
         {
         }
+    }
+    
+    public interface GenericNode
+    {
+        public abstract GenericNode deepCopy();
+        public abstract int compareTo(String targetKey);
+        public abstract String toString();
     }
 }

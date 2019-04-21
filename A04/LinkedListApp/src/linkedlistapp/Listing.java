@@ -9,7 +9,7 @@ import javax.swing.*;
  *
  * @author Keigh
  */
-public class Listing {
+public class Listing implements GenericSinglyLinkedList.GenericNode {
     private String _name;
     private String _number;
     private String _studentGPA;
@@ -48,12 +48,14 @@ public class Listing {
         _number = number;
     }
     
+    @Override
     public int compareTo(String targetKey)
    {
         return(_name.compareTo(targetKey));
 
    }
     
+    @Override
     public Listing deepCopy()
     {
         Listing clone = new Listing(_name, _number, _studentGPA);

@@ -12,7 +12,7 @@ package linkedlistapp;
 public class LinkedListDriver {
     public static void main(String[] args) {
         
-        SinglyLinkedList list = new SinglyLinkedList();
+        GenericSinglyLinkedList<Listing> list = new GenericSinglyLinkedList<Listing>();
         list.insert(new Listing("Keaunna", "1", "3.4"));  
         System.out.println("Here is the initial list:");
         list.showAll();
@@ -28,6 +28,10 @@ public class LinkedListDriver {
         System.out.println("------------------------------");
         System.out.println("Fetching 'Miyaunna'...");
         System.out.println(list.fetch("Miyaunna"));
+        
+        System.out.println("------------------------------");
+        System.out.println("Fetching 'Keaunna'...");
+        System.out.println(list.fetch("Keaunna"));
         
         //update
         System.out.println("------------------------------");
