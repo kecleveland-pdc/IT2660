@@ -30,7 +30,7 @@ public class StudentRecords
    }
    
     //INSERT 
-   public boolean Insert(Node newStudentData)
+   public boolean insert(Node newStudentData)
    {
        int low = 0;
        int high = _next - 1;
@@ -44,7 +44,7 @@ public class StudentRecords
             {
                 _studentData[0] = newStudentData.deepCopy();
             }
-            else if (newStudentData.getName().compareTo(_studentData[0].getName()) < 0)
+            else if (newStudentData.getStudentName().compareTo(_studentData[0].getStudentName()) < 0)
             {
                 Node tempNode = _studentData[0].deepCopy();
                 _studentData[0] = newStudentData.deepCopy();
@@ -58,10 +58,10 @@ public class StudentRecords
             return true;
         }
 
-       while(!(newStudentData.getName().compareTo(_studentData[i].getName()) < 0 && 
-               newStudentData.getName().compareTo(_studentData[i - 1].getName()) > 0 ))
+       while(!(newStudentData.getStudentName().compareTo(_studentData[i].getStudentName()) < 0 && 
+               newStudentData.getStudentName().compareTo(_studentData[i - 1].getStudentName()) > 0 ))
        {
-           if(newStudentData.getName().compareTo(_studentData[i].getName()) < 0)
+           if(newStudentData.getStudentName().compareTo(_studentData[i].getStudentName()) < 0)
            {
                high = i - 1;
            }else
@@ -83,16 +83,16 @@ public class StudentRecords
        return true; //inserted
    }
     
-   public Node Fetch(String targetKey)
+   public Node fetch(String targetKey)
    {
        int low = 0;
        int high = _next - 1;
        int i = (low + high)/2;
        
-       while(!(targetKey.equals(_studentData[i].getName())))
+       while(!(targetKey.equals(_studentData[i].getStudentName())))
        {
            //if((targetKey.compareTo(_studentData[i].getName()&& high != low)
-           if((targetKey.compareTo(_studentData[i].getName()) < 0) && high != low)
+           if((targetKey.compareTo(_studentData[i].getStudentName()) < 0) && high != low)
            {
                high = 1 - 1;
            }else
@@ -103,15 +103,15 @@ public class StudentRecords
        return _studentData[i].deepCopy();
    }
    
-   public boolean Delete(String targetKey)
+   public boolean delete(String targetKey)
    {
        int low = 0;
        int high = _next - 1;
        int i = (low + high)/2;
        
-       while(!(targetKey.equals(_studentData[i].getName())) && high != low)
+       while(!(targetKey.equals(_studentData[i].getStudentName())) && high != low)
        {
-           if(targetKey.compareTo(_studentData[i].getName()) < 0)
+           if(targetKey.compareTo(_studentData[i].getStudentName()) < 0)
            {
                high = i - 1;
            }else
@@ -135,17 +135,25 @@ public class StudentRecords
    }
    
 
-   public boolean Update(String targetKey, Node nodeToUpdate)
+   public boolean update(String targetKey, Node nodeToUpdate)
    {
-       if (Delete(targetKey) == false)
+       if (delete(targetKey) == false)
        {
            return false; //does not exist
        }
-       else if (Insert(nodeToUpdate) == false)  //this will perform the deepCopy from nodeToUpdate
+       else if (insert(nodeToUpdate) == false)  //this will perform the deepCopy from nodeToUpdate
        {
            return false; //not big enough for new entry
        }
        return true; //success
+   }
+   
+   public void showAll(){
+       //all records
+        for (int i = 0; i < _studentData.length - 1; i++)
+        {
+            System.out.println(_studentData[i]);
+        }
    }
    
    @Override

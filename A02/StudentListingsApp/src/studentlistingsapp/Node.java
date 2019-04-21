@@ -5,68 +5,95 @@
  */
 package studentlistingsapp;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Keigh
  */
 public class Node {
-    private String _name; //key
-    private String _address;
-    private String _number;
+    private String _studentName;
+    private String _studentNumber;
+    private String _studentGPA;
     
-    public Node(){
-    
-    }
-    
-    public Node(String name, String address, String number){
-        _name = name;
-        _address = address;
-        _number = number;
-    }
-    
-    public String getName()
+    public Node()
     {
-        return _name;
+        _studentName = "";
+        _studentNumber = "";
+        _studentGPA = "";
     }
     
-    public void setName(String name)
+    public Node(String studentName, String studentNumber, String studentGPA)
     {
-        _name = name;
+        _studentName = studentName;
+        _studentNumber = studentNumber;
+        _studentGPA = studentGPA;
     }
     
-    public String getAddress()
+    public String getStudentName()
     {
-        return _address;
+        return _studentName;
     }
     
-    public void setAddress(String address)
+    public void setStudetName(String name)
     {
-        _address = address;
+        _studentName = name;
     }
     
-    public String getNumber()
+    public String getStudentNumber()
     {
-        return _number;
+        return _studentNumber;
     }
     
-    public void setNumber(String number)
+    public void setStudentNumber(String studentNumber)
     {
-        _number = number;
+        _studentNumber = studentNumber;
     }
     
-    public Node deepCopy(){
-        Node clone = new Node(_name, _address, _number);
+    public String getStudentGPA()
+    {
+        return _studentNumber;
+    }
+    
+    public void setStudentGPA(String studentGPA)
+    {
+        _studentNumber = studentGPA;
+    }
+    
+
+    public int compareTo(String targetKey)
+   {
+        return(_studentName.compareTo(targetKey));
+
+   }
+    
+
+    public Node deepCopy()
+    {
+        Node clone = new Node(_studentName, _studentNumber, _studentGPA);
         return clone;
     }
     
-   public int compareTo(String targetKey)
-   {
-        return(_name.compareTo(targetKey));
-
-   }
+    public void input()
+    {
+        _studentName = JOptionPane.showInputDialog("Enter the student's name");
+        _studentGPA = JOptionPane.showInputDialog("Enter the student's number");
+        _studentNumber = JOptionPane.showInputDialog("Enter the student's GPA");     
+    }
+    
+    public void input(String targetKey)
+    {
+        _studentName = JOptionPane.showInputDialog("Please update " + targetKey + "'s name");
+        _studentGPA = JOptionPane.showInputDialog("Please update " + targetKey + "'s student number.");
+        _studentNumber = JOptionPane.showInputDialog("Please update " + targetKey + "'s GPA");     
+    }
+     
        
     @Override
     public String toString(){
-        return "Student Name: " + _name + " StudentAddress: " + _address + " StudentNumber: " + _number;
+        return "\nStudent Name: " + _studentName 
+                + "\nStudent Number: " + _studentNumber
+                + "\nStudent GPA: " + _studentGPA;       
     }
+  
 }

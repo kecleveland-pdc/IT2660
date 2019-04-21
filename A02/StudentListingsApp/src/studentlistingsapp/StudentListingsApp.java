@@ -15,7 +15,7 @@ public class StudentListingsApp {
     
         Scanner scanUtil = new Scanner(System.in);
         String targetKey = "";
-        String studentDataSet = "";
+        
         int maxDataSet = 0;
         int endProgram = 6;
         int userInput = 0;
@@ -27,12 +27,12 @@ public class StudentListingsApp {
             System.out.println("Please enter the maximum size of the data set: ");
             maxDataSet = Integer.parseInt(scanUtil.nextLine());
      
-            System.out.println("Please enter initial student data set in the folllwing format:\nStudentName1,StudentAddress1,StudentNumber1;StudentName2,StudentAddress2,StudentNumber2;...");
-            studentDataSet = scanUtil.nextLine();
-            StudentRecords records = InitStudentRecords(maxDataSet, studentDataSet);
-            System.out.println("Initial data set\n" + records.toString());
+            System.out.println("Please follow the prompts to enter student data:");
+            StudentRecords records = InitStudentRecords(maxDataSet);
+            System.out.println("Initial data set"); 
+            records.showAll();
+            
            
-            ////CLEAN THIS UP IN LESSON 3 -- 3/11/2019////
             while(endProgram != userInput)
             {
                 System.out.println("Please make a selection: ");
@@ -44,38 +44,41 @@ public class StudentListingsApp {
                         + "5. Get All Student Data\n"
                         + "6. Exit the program\n"
                 );
+                
                 userInput = Integer.parseInt(scanUtil.nextLine());
+                
                 if(userInput == 1)
                 {
-                    System.out.println("Please enter student data to insert in the format StudentName,Address(City),StudentNumber");
-                    targetKey = scanUtil.nextLine();
-                    String[] studentData = targetKey.split(",");
-                    records.Insert(new Node(studentData[0], studentData[1], studentData[2]));
-                    //System.out.println("Inserted " + records.Fetch(studentData[0]));
+                    Node listing = new Node();
+                    listing.input();
+                    records.insert(listing);
+                    System.out.println("Inserted " + records.fetch(listing.getStudentName()));
+                 
                 }else if(userInput == 2)
                 {
                     System.out.println("Please enter a student to fetch");
                     targetKey = scanUtil.nextLine();
-                   // System.out.println(records.Fetch(targetKey).toString());
+                    System.out.println(records.fetch(targetKey).toString());
                 }else if(userInput == 3)
                 {
                     System.out.println("Please enter a student to delete");
                     targetKey = scanUtil.nextLine();
-                   // System.out.println("Deleting " + records.Fetch(targetKey).toString());
-                   // records.Delete(targetKey);
+                    System.out.println("Deleting " + records.fetch(targetKey).toString());
+                    records.delete(targetKey);
                     System.out.println("Deleted " + targetKey + "\n");
                 }else if(userInput == 4)
                 {
-                    System.out.println("Please enter a student to update, in the following format:  Student1,UpdatedStudent1Name,UpdatedStuden1tAddress,UpdatedStudent1Number");
+                    System.out.println("Please enter a student to update:");
                     targetKey = scanUtil.nextLine();
-                    String[] studentData = targetKey.split(",");
-                    //System.out.println(records.Update(studentData[0], new Node(studentData[1],studentData[2],studentData[3])));
-                   // System.out.println("Updated " + studentData[0] + "\n" + records.Fetch(studentData[1]).toString());
+                    Node listing = new Node();
+                    listing.input(targetKey);
+                    records.insert(listing);
                 }else if(userInput == 5)
                 {
-                    //sort and get all records
+                    System.out.println("Here is the current list: ");
+                    records.showAll();
                 }
-                else if((userInput !=6 && userInput < 5))
+                else if(( userInput != 6 && userInput > 6 ))
                 {
                     System.out.println("Please choose an appropriate selection");
                 }
@@ -86,21 +89,16 @@ public class StudentListingsApp {
          }
     }     
     
-    public static StudentRecords InitStudentRecords(int maxDataSet, String studentDataSet)
+    public static StudentRecords InitStudentRecords(int maxDataSet)
     {
-        StudentRecords studentRecords = new StudentRecords(maxDataSet);
-        String[] students = GetStudentDataSet(studentDataSet);
+        StudentRecords studentRecords = new StudentRecords(maxDataSet);  
         try
         {
-          for(String student: students)
+             for(int i = 0; i < maxDataSet; i++)
             {
-                String[] studentData = student.split(",");
-                String name = studentData[0];
-                String address = studentData[1];
-                String number = studentData[2];
-            
-                Node studentNode = new Node(name, address, number);
-                studentRecords.Insert(studentNode);
+                Node listing = new Node();
+                listing.input();
+                studentRecords.insert(listing);
             }
         }
         catch(Exception ex)
@@ -108,18 +106,5 @@ public class StudentListingsApp {
             System.out.println("Error processing: " + ex.toString());
         }    
         return studentRecords;
-    }
-    
-    public static String[] GetStudentDataSet(String studentDataSet)
-    {
-        String data;
-        if(studentDataSet.endsWith(";"))
-        {
-            data = studentDataSet.replaceAll(";$","");
-        }
-        
-        data = studentDataSet;
-        
-        return data.split(";");
-    }
+    }    
 }
