@@ -12,7 +12,7 @@ package restricteddatastructures;
 public class StackDriver {
    // public static void main(String[] args) {
         
-        Stack stack = new Stack(3);
+        GenericStack stack = new GenericStack(3);
         Listing li = new Listing("Keaunna", "123 Street", "123 1111");
         Listing li2 = new Listing("Miya", "111 Street", "123 0000");
         Listing li3 = new Listing("Sharlene", "456 Street", "123 4444");

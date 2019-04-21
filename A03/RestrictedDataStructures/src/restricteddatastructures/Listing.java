@@ -9,7 +9,7 @@ package restricteddatastructures;
  *
  * @author Keigh
  */
-public class Listing {
+public class Listing implements GenericStack.GenericNode{
     private String _name;
     private String _number;
     private String _address;
@@ -60,9 +60,11 @@ public class Listing {
                 + "Number: " + _number + "\n";
     }
     
+    @Override
     public Listing deepCopy()
     {
         Listing clone = new Listing(_name, _address, _number);
         return clone;
     }
+
 }
