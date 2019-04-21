@@ -9,33 +9,33 @@ package restricteddatastructures;
  *
  * @author Keigh
  */
-public class Queue {
-    private Listing[] _data;
+public class GenericQueue<T> {
+    private T[] _data;
     private int _size;
     private int _numOfNodes;
     private int _front;
     private int _rear;
     
-    public Queue()
+    public GenericQueue()
     {
        _size = 100;
        _numOfNodes = 0;
        _rear = 0;
-       _data = new Listing[100];
+       _data = (T[]) new Object[100];
     }
     
-    public Queue(int size)
+    public GenericQueue(int size)
     {
         _size = size;
         _numOfNodes = 0;
         _front = 0;
         _rear = 0;
-        _data = new Listing[size];
+        _data = (T[]) new Object[size];
     }
     
-    public boolean enque(Listing newNode)
+    public boolean enque(T newNode)
     {
-        
+        GenericNode node = (GenericNode) newNode;
         if(_numOfNodes == _size)
         {
             //new array
@@ -44,8 +44,8 @@ public class Queue {
             _front = 0;
             _rear = 0;
             
-            Listing[] larger = new Listing[_size];  
-            Listing temp[] = _data;
+            T[] larger = (T[]) new Object[_size];  
+            T temp[] = _data;
             
             _data = larger;
             
@@ -62,13 +62,13 @@ public class Queue {
         }
  
         _numOfNodes = _numOfNodes + 1;
-        _data[_rear] = newNode.deepCopy(); //now can insert the new node at the rear
+        _data[_rear] = (T)node.deepCopy(); //now can insert the new node at the rear
         _rear = (_rear + 1) % _size;  //rear will properly be set for next enqueue
             
         return true;
     }
     
-    public Listing deque()
+    public T deque()
     {
         int frontLocation;
         if(_numOfNodes == 0)
@@ -105,7 +105,7 @@ public class Queue {
         return false;
     }
     
-    public Listing peek()
+    public T peek()
     {
         int frontLocation;
         if(_numOfNodes == 0)
@@ -134,5 +134,11 @@ public class Queue {
             System.out.println(_data[i].toString());
             i = (i + 1) % _size;
         }
+    }
+    
+    public interface GenericNode
+    {
+        public abstract GenericNode deepCopy();
+        public abstract String toString();
     }
 }

@@ -9,7 +9,7 @@ package restricteddatastructures;
  *
  * @author Keigh
  */
-public class Listing implements GenericStack.GenericNode{
+public class Listing implements GenericStack.GenericNode, GenericQueue.GenericNode{
     private String _name;
     private String _number;
     private String _address;

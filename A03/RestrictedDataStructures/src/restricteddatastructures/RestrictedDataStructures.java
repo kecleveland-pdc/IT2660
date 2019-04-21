@@ -16,7 +16,7 @@ public class RestrictedDataStructures {
      */
     public static void main(String[] args) {
         GenericStack stack = new GenericStack(2);
-        Queue queue = new Queue(2); 
+        GenericQueue queue = new GenericQueue(2); 
         
         Listing li = new Listing("Keaunna", "123 Street", "123 1111");
         Listing li2 = new Listing("Miya", "111 Street", "123 0000");
