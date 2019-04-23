@@ -32,53 +32,54 @@ public class StudentRecords
     //INSERT 
    public boolean insert(Node newStudentData)
    {
-       int low = 0;
-       int high = _next - 1;
-       int i = (low + high)/2;
+       int low = 0; //lower bound
+       int high = _next - 1; //upper bound
+       int i = (low + high)/2; //starting mid
+       
+//              //clean this up later
+//        if (_studentData[1] == null)
+//        {
+//            if (_studentData[0] == null)
+//            {
+//                _studentData[0] = newStudentData.deepCopy();
+//            }
+//            else if (newStudentData.getStudentName().compareTo(_studentData[0].getStudentName()) < 0)
+//            {
+//                Node tempNode = _studentData[0].deepCopy();
+//                _studentData[0] = newStudentData.deepCopy();
+//                _studentData[1] = tempNode.deepCopy();   
+//            }else
+//            {
+//                _studentData[1] = newStudentData.deepCopy();
+//            }
+//            _next = _next + 1;
+//            return true;
+//        }
 
-      
-       //clean this up later
-        if (_studentData[1] == null)
-        {
-            if (_studentData[0] == null)
-            {
-                _studentData[0] = newStudentData.deepCopy();
-            }
-            else if (newStudentData.getStudentName().compareTo(_studentData[0].getStudentName()) < 0)
-            {
-                Node tempNode = _studentData[0].deepCopy();
-                _studentData[0] = newStudentData.deepCopy();
-                _studentData[1] = tempNode.deepCopy();   
-            }else
-            {
-                _studentData[1] = newStudentData.deepCopy();
-            }
-
-            _next = _next + 1;
-            return true;
-        }
-
-       while(!(newStudentData.getStudentName().compareTo(_studentData[i].getStudentName()) < 0 && 
-               newStudentData.getStudentName().compareTo(_studentData[i - 1].getStudentName()) > 0 ))
+       
+       //TODO FIX INSERT
+       while(!(newStudentData.getStudentName().compareTo(_studentData[i].getStudentName()) < 0 &&  //if it's not NOT equal (ie != 0)
+               newStudentData.getStudentName().compareTo( _studentData[i-1].getStudentName()) > 0))
        {
-           if(newStudentData.getStudentName().compareTo(_studentData[i].getStudentName()) < 0)
+           
+           if(newStudentData.getStudentName().compareTo(_studentData[i].getStudentName()) < 0) 
            {
-               high = i - 1;
-           }else
+               high = i-1; // remove upper half since newStudentData is in lower half
+           }
+           else
            {
-              low = i + 1;   
+               low  = i+1;   //remove lower half since newStudentData is in upper half
+           }
+           i = (low + high)/2; //new mid
+       }
+       //found the actual key
+        for(int j = _next; j >= i; j--)
+           {
+              _studentData[j] = _studentData[j-1];
            }
            
-           i = (high + low) / 2;
-        }
-        
-        //move references down
-       for(int j = _next; j >= i; j--)
-       {
-           _studentData[j] = _studentData[j - 1];
-       }
-       _next = _next + 1;
-       _studentData[i] = newStudentData.deepCopy();
+           _next = _next + 1;
+           _studentData[i] = newStudentData.deepCopy();
        
        return true; //inserted
    }
@@ -99,6 +100,7 @@ public class StudentRecords
            {
               i = (low + high)/2;     
            }
+           i = (low + high)/2; //new mid
         }
        return _studentData[i].deepCopy();
    }
@@ -108,6 +110,27 @@ public class StudentRecords
        int low = 0;
        int high = _next - 1;
        int i = (low + high)/2;
+       
+       ////clean this up later
+//        if (_studentData[1] == null)
+//        {
+//            if (_studentData[0] == null)
+//            {
+//                _studentData[0] = newStudentData.deepCopy();
+//            }
+//            else if (newStudentData.getStudentName().compareTo(_studentData[0].getStudentName()) < 0)
+//            {
+//                Node tempNode = _studentData[0].deepCopy();
+//                _studentData[0] = newStudentData.deepCopy();
+//                _studentData[1] = tempNode.deepCopy();   
+//            }else
+//            {
+//                _studentData[1] = newStudentData.deepCopy();
+//            }
+//            _next = _next + 1;
+//            return true;
+//        }
+
        
        while(!(targetKey.equals(_studentData[i].getStudentName())) && high != low)
        {
