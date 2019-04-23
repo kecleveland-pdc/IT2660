@@ -49,7 +49,7 @@ public class StudentListingsApp {
                 
                 if(userInput == 1)
                 {
-                    Node listing = new Node();
+                    Listing listing = new Listing();
                     listing.input();
                     records.insert(listing);
                     System.out.println("Inserted " + records.fetch(listing.getStudentName()));
@@ -70,7 +70,7 @@ public class StudentListingsApp {
                 {
                     System.out.println("Please enter a student to update:");
                     targetKey = scanUtil.nextLine();
-                    Node listing = new Node();
+                    Listing listing = new Listing();
                     listing.input(targetKey);
                     records.insert(listing);
                 }else if(userInput == 5)
@@ -96,7 +96,7 @@ public class StudentListingsApp {
         {
              for(int i = 0; i < maxDataSet; i++)
             {
-                Node listing = new Node();
+                Listing listing = new Listing();
                 listing.input();
                 studentRecords.insert(listing);
             }

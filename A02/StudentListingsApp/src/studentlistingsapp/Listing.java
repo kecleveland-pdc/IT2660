@@ -11,19 +11,19 @@ import javax.swing.JOptionPane;
  *
  * @author Keigh
  */
-public class Node {
+public class Listing {
     private String _studentName;
     private String _studentNumber;
     private String _studentGPA;
     
-    public Node()
+    public Listing()
     {
         _studentName = "";
         _studentNumber = "";
         _studentGPA = "";
     }
     
-    public Node(String studentName, String studentNumber, String studentGPA)
+    public Listing(String studentName, String studentNumber, String studentGPA)
     {
         _studentName = studentName;
         _studentNumber = studentNumber;
@@ -68,9 +68,9 @@ public class Node {
    }
     
 
-    public Node deepCopy()
+    public Listing deepCopy()
     {
-        Node clone = new Node(_studentName, _studentNumber, _studentGPA);
+        Listing clone = new Listing(_studentName, _studentNumber, _studentGPA);
         return clone;
     }
     

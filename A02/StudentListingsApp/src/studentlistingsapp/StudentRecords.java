@@ -11,57 +11,53 @@ package studentlistingsapp;
  */
 public class StudentRecords 
 {
-   private Node[] _studentData;
    private int _next;
    private int _size;
+   private Listing[] _studentData;
    
    public StudentRecords()
    {
        _next = 0;
        _size = 100;
-       _studentData = new Node[_size];
+       _studentData = new Listing[_size];
    }
    
    public StudentRecords(int size)
    {
        _next = 0;
-       _studentData = new Node[size];
+       _studentData = new Listing[size];
        _size = size;
    }
    
     //INSERT 
-   public boolean insert(Node newStudentData)
+   public boolean insert(Listing newStudentData)
    {
        int low = 0; //lower bound
        int high = _next - 1; //upper bound
        int i = (low + high)/2; //starting mid
        
-//              //clean this up later
-//        if (_studentData[1] == null)
-//        {
-//            if (_studentData[0] == null)
-//            {
-//                _studentData[0] = newStudentData.deepCopy();
-//            }
-//            else if (newStudentData.getStudentName().compareTo(_studentData[0].getStudentName()) < 0)
-//            {
-//                Node tempNode = _studentData[0].deepCopy();
-//                _studentData[0] = newStudentData.deepCopy();
-//                _studentData[1] = tempNode.deepCopy();   
-//            }else
-//            {
-//                _studentData[1] = newStudentData.deepCopy();
-//            }
-//            _next = _next + 1;
-//            return true;
-//        }
-
+       //resize array
+       if(_next >= _size)
+       {
+           _size = _size+1;
+           
+           Listing tempStudentData[] = _studentData;
+           Listing expandedStudentData[] = new Listing[_size];
+           _studentData = expandedStudentData;
+           
+           for(int k = 0; k < tempStudentData.length-1; k++)
+           {
+               _studentData[k] = tempStudentData[k];  
+           }
+           
+           tempStudentData = null;
+           expandedStudentData = null;
+       }
        
        //TODO FIX INSERT
-       while(!(newStudentData.getStudentName().compareTo(_studentData[i].getStudentName()) < 0 &&  //if it's not NOT equal (ie != 0)
+       while(!( newStudentData.getStudentName().compareTo(_studentData[i].getStudentName()) < 0 &&  //if it's not NOT equal (ie != 0)
                newStudentData.getStudentName().compareTo( _studentData[i-1].getStudentName()) > 0))
-       {
-           
+       {   
            if(newStudentData.getStudentName().compareTo(_studentData[i].getStudentName()) < 0) 
            {
                high = i-1; // remove upper half since newStudentData is in lower half
@@ -84,7 +80,7 @@ public class StudentRecords
        return true; //inserted
    }
     
-   public Node fetch(String targetKey)
+   public Listing fetch(String targetKey)
    {
        int low = 0;
        int high = _next - 1;
@@ -92,7 +88,6 @@ public class StudentRecords
        
        while(!(targetKey.equals(_studentData[i].getStudentName())))
        {
-           //if((targetKey.compareTo(_studentData[i].getName()&& high != low)
            if((targetKey.compareTo(_studentData[i].getStudentName()) < 0) && high != low)
            {
                high = 1 - 1;
@@ -111,26 +106,23 @@ public class StudentRecords
        int high = _next - 1;
        int i = (low + high)/2;
        
-       ////clean this up later
-//        if (_studentData[1] == null)
-//        {
-//            if (_studentData[0] == null)
-//            {
-//                _studentData[0] = newStudentData.deepCopy();
-//            }
-//            else if (newStudentData.getStudentName().compareTo(_studentData[0].getStudentName()) < 0)
-//            {
-//                Node tempNode = _studentData[0].deepCopy();
-//                _studentData[0] = newStudentData.deepCopy();
-//                _studentData[1] = tempNode.deepCopy();   
-//            }else
-//            {
-//                _studentData[1] = newStudentData.deepCopy();
-//            }
-//            _next = _next + 1;
-//            return true;
-//        }
-
+       if(_next <= _size)
+       {
+           //decrease size of arraay
+           _size = _size-1;
+           
+           Listing tempStudentData[] = _studentData;
+           Listing expandedStudentData[] = new Listing[_size];
+           _studentData = expandedStudentData;
+           
+           for(int k = 0; k < tempStudentData.length-1; k++)
+           {
+               _studentData[k] = tempStudentData[k];  
+           }
+           
+           tempStudentData = null;
+           expandedStudentData = null;
+       }
        
        while(!(targetKey.equals(_studentData[i].getStudentName())) && high != low)
        {
@@ -158,7 +150,7 @@ public class StudentRecords
    }
    
 
-   public boolean update(String targetKey, Node nodeToUpdate)
+   public boolean update(String targetKey, Listing nodeToUpdate)
    {
        if (delete(targetKey) == false)
        {
