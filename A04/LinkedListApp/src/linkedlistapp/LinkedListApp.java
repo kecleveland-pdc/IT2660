@@ -60,21 +60,39 @@ public class LinkedListApp {
                 {
                     System.out.println("Please enter a student to fetch");
                     targetKey = scanUtil.nextLine();
-                    System.out.println(records.fetch(targetKey).toString());
+                    if(records.fetch(targetKey) != null)
+                    {
+                        System.out.println(records.fetch(targetKey).toString());
+                    }
+                    else
+                    {
+                        System.out.println(targetKey + " is not in the data set."); 
+                    }           
                 }else if(userInput == 3)
                 {
                     System.out.println("Please enter a student to delete");
                     targetKey = scanUtil.nextLine();
-                    System.out.println("Deleting " + records.fetch(targetKey).toString());
-                    records.delete(targetKey);
-                    System.out.println("Deleted " + targetKey + "\n");
+                    System.out.println("Deleting " + targetKey);
+                    if(records.delete(targetKey))
+                    {
+                        System.out.println("Deleted " + targetKey + "\n");
+                    }else
+                    {
+                        System.out.println(targetKey + " is not in the data set."+ "\n");
+                    }     
                 }else if(userInput == 4)
                 {
                     System.out.println("Please enter a student to update:");
                     targetKey = scanUtil.nextLine();
                     Listing listing = new Listing();
                     listing.input(targetKey);
-                    records.insert(listing);
+                    if(records.update(targetKey, listing))
+                    {
+                        System.out.println("Updated " + targetKey + "\n");
+                    }else
+                    {
+                        System.out.println(targetKey + " is not in the data set."+ "\n");
+                    }
                 }else if(userInput == 5)
                 {
                     System.out.println("Here is the current list: ");

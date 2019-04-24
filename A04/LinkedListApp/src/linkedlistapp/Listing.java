@@ -75,15 +75,15 @@ public class Listing implements GenericSLL.GenericNode {
     public void input()
     {
         _studentName = JOptionPane.showInputDialog("Enter the student's name");
-        _studentGPA = JOptionPane.showInputDialog("Enter the student's number");
-        _studentNumber = JOptionPane.showInputDialog("Enter the student's GPA");     
+        _studentNumber = JOptionPane.showInputDialog("Enter the student's number");
+        _studentGPA = JOptionPane.showInputDialog("Enter the student's GPA");     
     }
     
     public void input(String targetKey)
     {
         _studentName = JOptionPane.showInputDialog("Please update " + targetKey + "'s name");
-        _studentGPA = JOptionPane.showInputDialog("Please update " + targetKey + "'s student number.");
-        _studentNumber = JOptionPane.showInputDialog("Please update " + targetKey + "'s GPA");     
+        _studentNumber  = JOptionPane.showInputDialog("Please update " + targetKey + "'s student number.");
+        _studentGPA = JOptionPane.showInputDialog("Please update " + targetKey + "'s GPA");     
     }
      
        

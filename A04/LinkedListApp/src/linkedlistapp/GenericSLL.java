@@ -20,9 +20,7 @@ public class GenericSLL<T> {
     }
     
     public boolean insert(T newNode)
-    {
-        //TODO: Check for already inserted key
-        
+    { 
         GenericNode node = (GenericNode) newNode; //cast newNode to GenericNode
         Node n = new Node();
         if(n == null)
@@ -44,11 +42,10 @@ public class GenericSLL<T> {
         Node p = _h.next;
         GenericNode node = (GenericNode) p.l; 
         
-        while(p != null && !(node.compareTo(targetKey) == 0))
+        while(p != null && !(node.compareTo(targetKey) == 0) && node != null)
         { 
             p = p.next;
-            node = (GenericNode) p.l; 
-            
+            node = p == null ? null : (GenericNode)p.l;         
         }
         
         if(p != null)
@@ -67,12 +64,12 @@ public class GenericSLL<T> {
     {
         Node q = _h;
         Node p = _h.next;
-        GenericNode node = (GenericNode) p.l; 
-        while (p != null && !(node.compareTo(targetKey) == 0))
+        GenericNode node = (GenericNode) p.l;
+        while (p != null && !(node.compareTo(targetKey) == 0) && node!= null)
         {
             q = p;
             p = p.next;
-            node = (GenericNode) p.l; 
+            node = p == null ? null : (GenericNode)p.l;
         }
         if(p != null)
         {
