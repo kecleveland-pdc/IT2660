@@ -9,10 +9,10 @@ package linkedlistapp;
  *
  * @author Keigh
  */
-public class GenericSinglyLinkedList<T> {
+public class GenericSLL<T> {
     private Node _h;
     
-    public GenericSinglyLinkedList()
+    public GenericSLL()
     {
         _h = new Node();
         _h.l = null; //Listing or other type
@@ -20,7 +20,7 @@ public class GenericSinglyLinkedList<T> {
     }
     
     public boolean insert(T newNode)
-    {
+    { 
         GenericNode node = (GenericNode) newNode; //cast newNode to GenericNode
         Node n = new Node();
         if(n == null)
@@ -42,11 +42,10 @@ public class GenericSinglyLinkedList<T> {
         Node p = _h.next;
         GenericNode node = (GenericNode) p.l; 
         
-        while(p != null && !(node.compareTo(targetKey) == 0))
+        while(p != null && !(node.compareTo(targetKey) == 0) && node != null)
         { 
             p = p.next;
-            node = (GenericNode) p.l; 
-            
+            node = p == null ? null : (GenericNode)p.l;         
         }
         
         if(p != null)
@@ -65,12 +64,12 @@ public class GenericSinglyLinkedList<T> {
     {
         Node q = _h;
         Node p = _h.next;
-        GenericNode node = (GenericNode) p.l; 
-        while (p != null && !(node.compareTo(targetKey) == 0))
+        GenericNode node = (GenericNode) p.l;
+        while (p != null && !(node.compareTo(targetKey) == 0) && node!= null)
         {
             q = p;
             p = p.next;
-            node = (GenericNode) p.l; 
+            node = p == null ? null : (GenericNode)p.l;
         }
         if(p != null)
         {

@@ -9,71 +9,89 @@ import javax.swing.*;
  *
  * @author Keigh
  */
-public class Listing implements GenericSinglyLinkedList.GenericNode {
-    private String _name;
-    private String _number;
+public class Listing implements GenericSLL.GenericNode {
+    private String _studentName;
+    private String _studentNumber;
     private String _studentGPA;
     
     public Listing()
     {
-        _name = "";
-        _number = "";
+        _studentName = "";
+        _studentNumber = "";
         _studentGPA = "";
     }
     
-    public Listing(String name, String number, String address)
+    public Listing(String studetName, String studentNumber, String studentGPA)
     {
-        _name = name;
-        _number = number;
-        _studentGPA = address;
+        _studentName = studetName;
+        _studentNumber = studentNumber;
+        _studentGPA = studentGPA;
     }
     
-    public String getName()
+    public String getStudentName()
     {
-        return _name;
+        return _studentName;
     }
     
-    public void setName(String name)
+    public void setStudetName(String name)
     {
-        _name = name;
+        _studentName = name;
     }
     
-    public String getNumber()
+    public String getStudentNumber()
     {
-        return _number;
+        return _studentNumber;
     }
     
-    public void setNumber(String number)
+    public void setStudentNumber(String studentNumber)
     {
-        _number = number;
+        _studentNumber = studentNumber;
+    }
+    
+    public String getStudentGPA()
+    {
+        return _studentNumber;
+    }
+    
+    public void setStudentGPA(String studentGPA)
+    {
+        _studentNumber = studentGPA;
     }
     
     @Override
     public int compareTo(String targetKey)
    {
-        return(_name.compareTo(targetKey));
+        return(_studentName.compareTo(targetKey));
 
    }
     
     @Override
     public Listing deepCopy()
     {
-        Listing clone = new Listing(_name, _number, _studentGPA);
+        Listing clone = new Listing(_studentName, _studentNumber, _studentGPA);
         return clone;
     }
     
     public void input()
     {
-        _name = JOptionPane.showInputDialog("Enter a name: ");
-        _studentGPA = JOptionPane.showInputDialog("Enter an number");
-        _number = JOptionPane.showInputDialog("Enter an address");     
+        _studentName = JOptionPane.showInputDialog("Enter the student's name");
+        _studentNumber = JOptionPane.showInputDialog("Enter the student's number");
+        _studentGPA = JOptionPane.showInputDialog("Enter the student's GPA");     
     }
+    
+    public void input(String targetKey)
+    {
+        _studentName = JOptionPane.showInputDialog("Please update " + targetKey + "'s name");
+        _studentNumber  = JOptionPane.showInputDialog("Please update " + targetKey + "'s student number.");
+        _studentGPA = JOptionPane.showInputDialog("Please update " + targetKey + "'s GPA");     
+    }
+     
        
     @Override
     public String toString(){
-        return "\nStudent Name: " + _name 
-                + "\nStudent Number: " + _number
-                + "\nGPA: " + _studentGPA;       
+        return "\nStudent Name: " + _studentName 
+                + "\nStudent Number: " + _studentNumber
+                + "\nStudent GPA: " + _studentGPA;       
     }
   
 }
