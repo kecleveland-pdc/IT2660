@@ -18,6 +18,7 @@ public class MergeSortApp {
     public static void main(String[] args) {
         
         ArrayList<Integer> arrList = new ArrayList<Integer>();
+        ArrayList<Integer> mergeSortedArrList = new ArrayList<Integer>();
         int MIN = 0;
         int MAX = 1000;
         int ARRLISTSIZE = 100;
@@ -32,16 +33,10 @@ public class MergeSortApp {
             }
         }
         
-        //ShowAll
-        for (Integer item : arrList)
-        {
-            System.out.println(item);
-        }
-        
+        ShowAll(arrList);
         System.out.println("arrList size " + arrList.size());
-        //merge sort
-        MergeSort(arrList,MIN, ARRLISTSIZE);
-        //ShowAll
+        mergeSortedArrList = MergeSort(arrList, MIN, ARRLISTSIZE);
+        ShowAll(mergeSortedArrList);
     }
     
     public static ArrayList<Integer> MergeSort(ArrayList<Integer> arrList, int low, int high)
@@ -49,40 +44,30 @@ public class MergeSortApp {
         ArrayList<Integer> arrListLeft = new ArrayList<Integer>();
         ArrayList<Integer> arrListRight = new ArrayList<Integer>();
      
-        int mid = (low + high) / 2; 
-
         //1. Get middle
+        int mid = (low + high) / 2; 
+        
         //2. add to left/right arrays
-        for(int i = 0; i < mid; i++)
+        for(int i = 0; i < high; i++)
         {
-            arrListLeft.add(arrList.get(i));
+            if(i < mid)
+            {
+                arrListLeft.add(arrList.get(i));
+            }
+            else
+            {
+                arrListRight.add(arrList.get(i));
+            }
         }
+       //sort left and right
+       arrListLeft = MergeSort(arrListLeft, low, high);
+       arrListRight = MergeSort(arrListRight, low, high);
+       ShowAll(arrListLeft);
+       ShowAll(arrListRight);
+       arrListRight = MergeSort(arrListRight, low, high);
         
-        for(int i = mid; i < arrList.size(); i++)
-        {
-            arrListRight.add(arrList.get(i));
-        }
-        
-        System.out.println("PrintingLeft..");
-        
-        for (Integer item : arrListLeft)
-        {
-            
-            System.out.println(item.toString());
-        }
-        
-        System.out.println("PrintingRight...");
-        
-        for (Integer item : arrListRight)
-        {
-            
-            System.out.println(item.toString());
-        }
-          
-        System.out.println("Count of arrListLeft " + arrListLeft.size());
-        System.out.println("Count of arrListRight " + arrListRight.size());
-        
-        return arrList;
+        //merge leftArrayList and rightArrayList
+        return Merge(arrListLeft, arrListRight);
     }
     
     public static int GenerateRandomNumber(int min, int max)
@@ -93,5 +78,31 @@ public class MergeSortApp {
         newRandom = r.nextInt((max - min) + 1) + min;
         return newRandom;
 
+    }
+    
+    public static ArrayList<Integer> Merge(ArrayList<Integer> arrListLeft, ArrayList<Integer> arrListRight)
+    {
+        //final solution should be: //merge of leftArrayList and rightArrayList
+        //get each array
+        //create smaller arrlists until reaching base case (i.e. 1 item per ArrayList
+        //add each item to master list via comparison
+        
+        ArrayList mergedArrList = new ArrayList<Integer>(100);
+        
+        while(!arrListLeft.isEmpty() && !arrListRight.isEmpty())
+        {
+            
+        }
+        
+        
+        return mergedArrList;
+    }
+    
+    public static void ShowAll(ArrayList<Integer> arrList)
+    {
+        for (Integer item : arrList)
+        {
+            System.out.println(item);
+        }
     }
 }
