@@ -16,30 +16,73 @@ public class MergeSortApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        Random random = new Random();
-        ArrayList<Integer> arr = new ArrayList<Integer>();
+        
+        ArrayList<Integer> arrList = new ArrayList<Integer>();
         int MIN = 0;
-        int MAX = 100;
+        int MAX = 1000;
+        int ARRLISTSIZE = 100;
         
-        while(arr.size() <= 100)
+        while(arrList.size() <= ARRLISTSIZE - 1)
         {
-            //Min + (int)(Math.random() * ((Max - Min) + 1))
-            arr.add(GenerateRandomNumber(MIN, MAX));
+            int newRandom = GenerateRandomNumber(MIN, MAX);
+            
+            if(!arrList.contains(newRandom))
+            {
+                arrList.add(newRandom);
+            }
         }
         
-        for (Integer item : arr)
+        //ShowAll
+        for (Integer item : arrList)
         {
-            System.out.println(item.toString());
+            System.out.println(item);
         }
+        
+        System.out.println("arrList size " + arrList.size());
+        //merge sort
+        MergeSort(arrList,MIN, ARRLISTSIZE);
+        //ShowAll
     }
     
-    public static Arrays[] MergeSort(Arrays[] arr)
+    public static ArrayList<Integer> MergeSort(ArrayList<Integer> arrList, int low, int high)
     {
-        //1. split array in half (create 2 subarrays)
-        //while arrays are not empty
-            //if 
-        return arr;
+        ArrayList<Integer> arrListLeft = new ArrayList<Integer>();
+        ArrayList<Integer> arrListRight = new ArrayList<Integer>();
+     
+        int mid = (low + high) / 2; 
+
+        //1. Get middle
+        //2. add to left/right arrays
+        for(int i = 0; i < mid; i++)
+        {
+            arrListLeft.add(arrList.get(i));
+        }
+        
+        for(int i = mid; i < arrList.size(); i++)
+        {
+            arrListRight.add(arrList.get(i));
+        }
+        
+        System.out.println("PrintingLeft..");
+        
+        for (Integer item : arrListLeft)
+        {
+            
+            System.out.println(item.toString());
+        }
+        
+        System.out.println("PrintingRight...");
+        
+        for (Integer item : arrListRight)
+        {
+            
+            System.out.println(item.toString());
+        }
+          
+        System.out.println("Count of arrListLeft " + arrListLeft.size());
+        System.out.println("Count of arrListRight " + arrListRight.size());
+        
+        return arrList;
     }
     
     public static int GenerateRandomNumber(int min, int max)
