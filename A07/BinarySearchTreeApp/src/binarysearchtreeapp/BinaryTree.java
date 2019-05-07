@@ -215,6 +215,32 @@ public class BinaryTree {
          return false;
     }
     
+    public void showAll()
+    {
+        if(root == null)
+        {
+            System.out.println("The structure is empty");
+        }
+        else
+        {
+            LNRTraversal(root);
+        }  
+    }
+    
+    public void LNRTraversal(Node root) //In Order as added (in sequence)
+    {
+        if(root.leftChild != null)
+        {
+            LNRTraversal(root.leftChild);
+        }
+
+        System.out.println(root.listingNode);
+        if(root.rightChild != null)
+        {
+           LNRTraversal(root.rightChild);
+        }
+    }
+    
     //needs to be part of BinaryTree
     public class Node 
     {

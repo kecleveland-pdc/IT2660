@@ -30,7 +30,7 @@ public class BinarySearchTreeApp {
             System.out.println("Please follow the prompts to enter student data:");
             BinaryTree records = InitStudentRecords(maxDataSet);
             System.out.println("Initial data set"); 
-            //records.showAll(); //TRAVERSAL HERE
+            records.showAll(); //TRAVERSAL HERE
             
            
             while(endProgram != userInput)
@@ -94,7 +94,7 @@ public class BinarySearchTreeApp {
                 }else if(userInput == 5)
                 {
                     System.out.println("Here is the current list: ");
-                    //records.showAll();
+                    records.showAll();
                 }
                 else if(( userInput != 6 && userInput > 6 ))
                 {
