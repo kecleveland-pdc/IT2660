@@ -223,7 +223,7 @@ public class BinaryTree {
         }
         else
         {
-            LNRTraversal(root);
+            RNLTraversal(root);
         }  
     }
     
@@ -238,6 +238,20 @@ public class BinaryTree {
         if(root.rightChild != null)
         {
            LNRTraversal(root.rightChild);
+        }
+    }
+    
+    public void RNLTraversal(Node root) //Out of order as added (in sequence) (ie descending)
+    {
+        if(root.rightChild != null)
+        {
+            LNRTraversal(root.rightChild);
+        }
+
+        System.out.println(root.listingNode);
+        if(root.leftChild != null)
+        {
+           LNRTraversal(root.leftChild);
         }
     }
     
