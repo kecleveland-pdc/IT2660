@@ -74,6 +74,43 @@ public class BinaryTree {
         } 
     }
     
+    public boolean delete(String targetKey)
+    {
+        boolean foundNode;
+        NodeWrapper nwParent = new NodeWrapper();
+        NodeWrapper nwChild = new NodeWrapper();
+        Node largest;
+        Node nextLargest;
+        
+        //find the node
+        foundNode = findNode(targetKey, nwParent, nwChild);
+        if(foundNode == false)
+        {
+            return false;
+        }
+        else
+        {
+            //figure out which case it is 
+        }
+        
+        return true; //PLACEHOLDER
+    }
+    
+    public boolean update(String targetKey, Listing newListing)
+    {
+        if(delete(targetKey) == false)
+        {
+            return false;
+        }
+        else if(insert(newListing) == false)
+        {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    
     public boolean findNode(String targetKey, NodeWrapper nwParent, NodeWrapper nwChild)
     {
         nwParent.set(root);
