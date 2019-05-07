@@ -21,9 +21,9 @@ public class MergeSortApp {
         ArrayList<Integer> mergeSortedArrList = new ArrayList<Integer>();
         int MIN = 0;
         int MAX = 1000;
-        int ARRLISTSIZE = 100;
+        int ARRAY_LIST_SIZE = 100;
         
-        while(arrList.size() <= ARRLISTSIZE - 1)
+        while(arrList.size() <= ARRAY_LIST_SIZE - 1)
         {
             int newRandom = GenerateRandomNumber(MIN, MAX);
             
@@ -33,41 +33,56 @@ public class MergeSortApp {
             }
         }
         
+        System.out.println("Unsored arrayList... ");
         ShowAll(arrList);
-        System.out.println("arrList size " + arrList.size());
-        mergeSortedArrList = MergeSort(arrList, MIN, ARRLISTSIZE);
+        
+        System.out.println("Sorting arrayList...");
+        mergeSortedArrList = MergeSort(arrList);
+        
+        //show all sorted
+        System.out.println("Showing sorted arrayList...");
         ShowAll(mergeSortedArrList);
     }
     
-    public static ArrayList<Integer> MergeSort(ArrayList<Integer> arrList, int low, int high)
+    public static ArrayList<Integer> MergeSort(ArrayList<Integer> arrList)
     {
         ArrayList<Integer> arrListLeft = new ArrayList<Integer>();
         ArrayList<Integer> arrListRight = new ArrayList<Integer>();
      
-        //1. Get middle
-        int mid = (low + high) / 2; 
-        
-        //2. add to left/right arrays
-        for(int i = 0; i < high; i++)
+        //determine base case
+        if (arrList.size() <= 1)
         {
-            if(i < mid)
-            {
-                arrListLeft.add(arrList.get(i));
-            }
-            else
-            {
-                arrListRight.add(arrList.get(i));
-            }
+            return arrList;
         }
-       //sort left and right
-       arrListLeft = MergeSort(arrListLeft, low, high);
-       arrListRight = MergeSort(arrListRight, low, high);
-       ShowAll(arrListLeft);
-       ShowAll(arrListRight);
-       arrListRight = MergeSort(arrListRight, low, high);
+                
+        //get mid to be able to split arrList into two
+        int mid = (arrList.size()) / 2; 
         
-        //merge leftArrayList and rightArrayList
-        return Merge(arrListLeft, arrListRight);
+        try
+        {
+            for(int i = 0; i < arrList.size(); i++)
+            {
+                if(i < mid)
+                {
+                    arrListLeft.add(arrList.get(i));
+                }
+                else
+                {
+                    arrListRight.add(arrList.get(i));
+                }
+            }
+        //recursively merge sort
+            //create smaller sublists until reaching base case (which returns item to be compared)
+         arrListLeft = MergeSort(arrListLeft);
+         arrListRight = MergeSort(arrListRight);
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.toString());
+        }
+        
+        return Merge(arrListLeft, arrListRight); //this will do the actual "sorting"
+
     }
     
     public static int GenerateRandomNumber(int min, int max)
@@ -82,20 +97,43 @@ public class MergeSortApp {
     
     public static ArrayList<Integer> Merge(ArrayList<Integer> arrListLeft, ArrayList<Integer> arrListRight)
     {
-        //final solution should be: //merge of leftArrayList and rightArrayList
-        //get each array
-        //create smaller arrlists until reaching base case (i.e. 1 item per ArrayList
-        //add each item to master list via comparison
+        //while arrListLeft and arrListRight are both not empty
+            //add first item to sortedArrList via comparison
+            //set left/right arrList to new arrList by removing arrList[0]
+            //add non-empty arrList item back to sortedArrList 
+       //return sortedArray
         
-        ArrayList mergedArrList = new ArrayList<Integer>(100);
+        ArrayList sortedArrList = new ArrayList<Integer>(); //sortedArray 
         
         while(!arrListLeft.isEmpty() && !arrListRight.isEmpty())
         {
-            
+            if(arrListLeft.get(0) <= arrListRight.get(0))
+            {
+                sortedArrList.add(arrListLeft.get(0)); 
+                arrListLeft.remove(0); //left := rest(left)
+            }
+            else
+            {
+                sortedArrList.add(arrListRight.get(0));
+                arrListRight.remove(0); //right := rest(right)
+            }
         }
         
+        //add right to array if not empty
+        while(!arrListLeft.isEmpty())
+        {
+            sortedArrList.add(arrListLeft.get(0));
+            arrListLeft.remove(0);
+        }
         
-        return mergedArrList;
+        //add right to array if not empty
+        while(!arrListRight.isEmpty())
+        {
+            sortedArrList.add(arrListRight.get(0));
+            arrListRight.remove(0);
+        }
+        
+        return sortedArrList;
     }
     
     public static void ShowAll(ArrayList<Integer> arrList)
