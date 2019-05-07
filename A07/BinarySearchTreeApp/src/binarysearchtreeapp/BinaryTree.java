@@ -43,15 +43,17 @@ public class BinaryTree {
                 findNode(newListing.getStudentName(), nwParent, nwChild);
                 if(newListing.getStudentName().compareTo(nwParent.get().listingNode.getStudentName()) < 0)
                 {
-                    //if nwParent.get().leftChild = curNode
-                        //insert new node as left child
-                    //else
-                       //insert new node as right child
+                    //insert new node as left chil
+                    nwParent.get().leftChild = curNode; //if nwParent.get().leftChild = curNode     
+                }
+                else
+                {
+                    //insert new node as right child
+                    nwParent.get().rightChild = curNode; 
                 }
             }
                     
         return true;
-        
         }
     }
     
@@ -60,10 +62,16 @@ public class BinaryTree {
         boolean foundNode;
         NodeWrapper nwParent = new NodeWrapper();
         NodeWrapper nwChild = new NodeWrapper();
-        //foundNode = findNode();
         
-        return null;
-        
+        foundNode = findNode(targetKey, nwParent, nwChild);
+        if(foundNode)
+        {
+            return nwChild.get().listingNode.deepCopy();
+        }
+        else
+        {
+            return null; //not found
+        } 
     }
     
     public boolean findNode(String targetKey, NodeWrapper nwParent, NodeWrapper nwChild)
