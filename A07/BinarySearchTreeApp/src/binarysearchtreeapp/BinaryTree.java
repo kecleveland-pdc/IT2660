@@ -20,8 +20,8 @@ public class BinaryTree {
     public boolean insert(Listing newListing)
     {
         //create parent/child node wrappers
-        NodeWrapper nodeWrapperParent = new NodeWrapper();
-        NodeWrapper nodeWrapperChild = new NodeWrapper();
+        NodeWrapper nwParent = new NodeWrapper();
+        NodeWrapper nwChild = new NodeWrapper();
         Node curNode = new Node();
         
         if(curNode == null)
@@ -33,9 +33,69 @@ public class BinaryTree {
             curNode.listingNode = newListing.deepCopy();
             curNode.leftChild = null;
             curNode.rightChild  = null;
+            if(root == null) //empty tree bc root is null 
+            {
+                root = curNode; //set root to curNode to start tree
+            }
+            else
+            {
+                 //find parentNode based on key, leftchild(null), rightChild(null)
+                findNode(newListing.getStudentName(), nwParent, nwChild);
+                if(newListing.getStudentName().compareTo(nwParent.get().listingNode.getStudentName()) < 0)
+                {
+                    //if nwParent.get().leftChild = curNode
+                        //insert new node as left child
+                    //else
+                       //insert new node as right child
+                }
+            }
+                    
+        return true;
+        
+        }
+    }
+    
+    public Listing fetch(String targetKey)
+    {
+        boolean foundNode;
+        NodeWrapper nwParent = new NodeWrapper();
+        NodeWrapper nwChild = new NodeWrapper();
+        //foundNode = findNode();
+        
+        return null;
+        
+    }
+    
+    public boolean findNode(String targetKey, NodeWrapper nwParent, NodeWrapper nwChild)
+    {
+        nwParent.set(root);
+        nwChild.set(root);
+        
+        if(root == null)
+        {
+            return true;
         }
         
-        return true;
+        while(nwChild.get() != null)
+        {
+            if(nwChild.get().listingNode.compareTo(targetKey) == 0)
+            {
+                return true; //found the node
+            }
+            else
+            {
+                nwParent.set(nwChild.get());
+                if(targetKey.compareTo(nwChild.get().listingNode.getStudentName()) < 0)
+                {
+                    nwChild.set(nwChild.get().leftChild);
+                }
+                else
+                {
+                    nwChild.set(nwChild.get().rightChild);
+                }
+            }
+        }
+         return false;
     }
     
     //needs to be part of BinaryTree
