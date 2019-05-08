@@ -20,6 +20,7 @@ public class FinalProject {
 
         int MIN = 1;
         int MAX = 5;
+        int chosenVertex = 3;
         Graph graph1 = new Graph(MAX);
         
         try
@@ -38,11 +39,17 @@ public class FinalProject {
                 }      
             }
             
-            //insert non-random edges
+            //insert non-random adjacent edges
             graph1.insertEdge(0,1);
+            graph1.insertEdge(0,3);
+            graph1.insertEdge(0,4);
+            graph1.insertEdge(1,0);
             graph1.insertEdge(1,2);
             graph1.insertEdge(1,3);
-            graph1.insertEdge(2,4);
+            graph1.insertEdge(3,0);
+            graph1.insertEdge(3,4);
+            graph1.insertEdge(4,0);
+            graph1.insertEdge(4,3);
             
 //            for(int i = 0; i < graph1.numberOfVertices; i++)
 //            {
@@ -53,8 +60,11 @@ public class FinalProject {
 //                System.out.println("\n");
 //            }
             
-            System.out.println("Start DFT at Vertex 0\n");
-            graph1.startDFT(0);
+            System.out.println("Start DFT at Vertex " + chosenVertex + "\n");
+            graph1.startDFT(chosenVertex);
+            
+//            System.out.println("Start BFT at Vertex 4\n");
+//            graph1.startBFT(4);
         }
         catch(Exception ex)
         {

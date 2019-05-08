@@ -12,6 +12,7 @@ package finalproject;
 public class Node {
     private int _nodeValue;
     boolean pushed; //needed to determine if pushing on stack
+
     
     Node(int value)
     {
@@ -49,8 +50,9 @@ public class Node {
         pushed = value;
     }
     
-    public void visit()
+    public void visit(int vertexNumber)
     {
-        System.out.println(this.getNode()); //TO DO MAKE BETTER REPRESENATION
-    }
+        System.out.println("Vertex[" + vertexNumber + "] with number: " + this.getNode()); //TO DO MAKE BETTER REPRESENATION
+    } 
+    
 }
