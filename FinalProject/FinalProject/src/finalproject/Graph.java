@@ -8,21 +8,29 @@ import java.util.Stack;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 /**
  *
  * @author Keigh
  */
 public class Graph {
     Node vertex[];
-    int edge[][]; //adjacency matrix array
-    int tree[][]; //adjacency matrix array for spanning tree
+    Utility util;
+    int edge[][]; //int edge[][]; //adjacency matrix array 2-dim array 
+    int edgeWeight[][];
+    int spTree[][]; //adjacency matrix array for spanning tree
+    int mSPTree[][];
+    int wMatrix[][]; //weight matrix
     int max;
     int numberOfVertices;
     
     public Graph(int vertexValue)
     {
         vertex = new Node[vertexValue];
+        util = new Utility();
         edge = new int[vertexValue][vertexValue];
+        edgeWeight = new int[vertexValue][vertexValue];
         max = vertexValue; 
         numberOfVertices = 0;
     }
@@ -40,7 +48,7 @@ public class Graph {
         return true;
     }
     
-    public boolean insertEdge(int fromVertex, int toVertex)
+    public boolean insertEdge(int fromVertex, int toVertex, int vertexValue)
     {
         if(vertex[fromVertex] == null || vertex[toVertex] == null)
         {
@@ -48,6 +56,8 @@ public class Graph {
         }
         
         edge[fromVertex][toVertex] = 1; //eg. [0][1]
+        edgeWeight[fromVertex][toVertex] = util.GenerateRandomNumber(1,20);
+        System.out.println("Added edge at Vertex[" + fromVertex + "][" + toVertex + "] with weight: " + edgeWeight[fromVertex][toVertex]);
         return true;
     }
     
@@ -155,9 +165,35 @@ public class Graph {
         }
     }
     
+    //creating the spanning tree
+    public void spTree(int firstVertex)
+    {
+        Stack<Integer> stack = new Stack<>();
+        int visited;
+        
+        stack.push(firstVertex);
+        vertex[firstVertex].setPushed(true);
+        
+        while(!stack.isEmpty())
+        {
+            visited = stack.pop();
+            
+            for(int column = 0; column < numberOfVertices; column++)
+            {
+                if(edge[visited][column] == 1 && !vertex[column].getPushed())
+                {
+                    stack.push(column);
+                    vertex[column].setPushed(true);
+                    spTree[visited][column] = 1;
+                    spTree[column][visited] = 1; //spanning tree
+                }
+            }
+        }
+        
+    }
+
     public void dijkstra(int firstVertex)
     {
-
         //TO DO
         int visited; 
         Stack<Integer> stack = new Stack<>();
@@ -172,8 +208,8 @@ public class Graph {
                  {
                     stack.push(column);
                     vertex[column].setPushed(true);
-                    tree[visited][column] = 1;
-                    tree[column][visited] = 1;
+                    spTree[visited][column] = 1;
+                    spTree[column][visited] = 1;
                 }
             }
         }
