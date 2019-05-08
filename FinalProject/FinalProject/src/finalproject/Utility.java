@@ -6,13 +6,14 @@
 package finalproject;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 /**
  *
  * @author Keigh
  */
 public class Utility {
-    
+ 
     public Utility()
     {
     
@@ -27,4 +28,9 @@ public class Utility {
         return newRandom;
 
     } 
+    
+    public void outputSearchData(ArrayList arrList, int totalNumOfNodes, int length, int foundNode)
+    {
+        
+    }
 }

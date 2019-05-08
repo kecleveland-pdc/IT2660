@@ -8,20 +8,22 @@ import java.util.Stack;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 /**
  *
  * @author Keigh
  */
 public class Graph {
+    
     Node vertex[];
     Utility util;
+    ArrayList<Integer> nodeArrList;
+    
     int edge[][]; //int edge[][]; //adjacency matrix array 2-dim array 
     int edgeWeight[][];
     int spTree[][]; //adjacency matrix array for spanning tree
     int mSPTree[][];
     int wMatrix[][]; //weight matrix
+    
     int max;
     int numberOfVertices;
     
@@ -29,6 +31,7 @@ public class Graph {
     {
         vertex = new Node[vertexValue];
         util = new Utility();
+        nodeArrList = new ArrayList<>();
         edge = new int[vertexValue][vertexValue];
         edgeWeight = new int[vertexValue][vertexValue];
         max = vertexValue; 
@@ -58,6 +61,7 @@ public class Graph {
         edge[fromVertex][toVertex] = 1; //eg. [0][1]
         edgeWeight[fromVertex][toVertex] = util.GenerateRandomNumber(1,20);
         System.out.println("Added edge at Vertex[" + fromVertex + "][" + toVertex + "] with weight: " + edgeWeight[fromVertex][toVertex]);
+        
         return true;
     }
     
@@ -102,7 +106,7 @@ public class Graph {
                 if(!visited.contains(nextNode))
                 {
                     visited.add(nextNode); //visited
-                    System.out.println("Vertex [" + nextNode + "] with number: " + vertex[nextNode].getNode()); //show visited
+                    System.out.println("Traveled to: Vertex [" + nextNode + "] with number: " + vertex[nextNode].getNode()); //show visited
                     if(vertex[nextNode].getNode() == chosenNumber)
                     {
                         System.out.println("Found " + chosenNumber + " at Vertex[" + nextNode + "]. Exiting...");
@@ -118,12 +122,12 @@ public class Graph {
                     }
                 }
             }
+            System.out.println("Failed. Did not find " + chosenNumber + " with this search.");
         }
         catch(Exception ex)
         {
-            System.out.println("Error " + ex.toString());
-        }
-        
+            System.out.println("Error: " + ex.toString());
+        } 
     }
     
     public void startDFT(int firstVertex, int chosenNumber)
@@ -141,27 +145,35 @@ public class Graph {
         
         stack.push(firstVertex); //first visited
         vertex[firstVertex].setPushed(true); //has been visited
-        
-        while(!stack.empty())
+        try
         {
-            visited = stack.pop(); //returns object
-            vertex[visited].visit(visited); //visit vertex (ie show)
-            
-            //FIND THE NUMBER
-            if(vertex[visited].getNode() == chosenNumber)
+            while(!stack.empty())
             {
-                System.out.println("Found " + chosenNumber + " at Vertex[" + visited + "]. Exiting...");
-                break;
-            }
+                visited = stack.pop(); //returns object
+                vertex[visited].visit(visited); //visit vertex (ie show)
             
-            for(int column = 0; column < numberOfVertices; column++)
-            {
-                if(edge[visited][column] == 1 && !vertex[column].getPushed()) //is edge and not already visited
-                 {
-                    stack.push(column);
-                    vertex[column].setPushed(true);
+                //FIND THE NUMBER
+                if(vertex[visited].getNode() == chosenNumber)
+                {
+                    System.out.println("Success! Found " + chosenNumber + " at Vertex[" + visited + "]. Exiting...");
+                    break;
+                }
+            
+                for(int column = 0; column < numberOfVertices; column++)
+                {
+                    if(edge[visited][column] == 1 && !vertex[column].getPushed()) //is edge and not already visited
+                    {
+                        stack.push(column);
+                        vertex[column].setPushed(true);
+                    }
                 }
             }
+        
+            System.out.println("Failed. Did not find " + chosenNumber + " with this search.");
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Error: " + ex.toString());
         }
     }
     

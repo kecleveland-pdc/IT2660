@@ -54,7 +54,7 @@ public class Node {
     
     public void visit(int vertexNumber)
     {
-        System.out.println("Vertex[" + vertexNumber + "] with number: " + this.getNode()); //TO DO MAKE BETTER REPRESENATION
+        System.out.println("Traveled to: Vertex[" + vertexNumber + "] with number: " + this.getNode()); //TO DO MAKE BETTER REPRESENATION
     }
     
 }

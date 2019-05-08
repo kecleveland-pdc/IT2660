@@ -27,7 +27,7 @@ public class FinalProjectDriver {
         System.out.println("--------------------------------------------------");
         System.out.println("Please a number to search for:");
             
-       // chosenNumber = Integer.parseInt(scanUtil.nextLine());
+        chosenNumber = Integer.parseInt(scanUtil.nextLine());
 
         try
         {
@@ -46,7 +46,6 @@ public class FinalProjectDriver {
             }
             
             //insert non-random adjacent edges
-            
             graph1.insertEdge(0,1,MAX);
             graph1.insertEdge(0,3,MAX);
             graph1.insertEdge(0,4,MAX);
@@ -58,17 +57,17 @@ public class FinalProjectDriver {
             graph1.insertEdge(4,0,MAX);
             graph1.insertEdge(4,3,MAX);
             
-            //System.out.println("Getting minTree...");
-           // graph1.minSPTree(startingVortex);
-//            
-//            System.out.println();
-//            System.out.println("Starting vortex " + (startingVortex));
-//            System.out.println("Starting DFT for number:  " + startingVortex + "\n");
-//            graph1.startDFT(startingVortex, chosenNumber);
-//            
-//            System.out.println();
-//            System.out.println("Starting BFT for number: " +  startingVortex+ "\n");
-//            graph1.startBFT(startingVortex, chosenNumber);
+           //System.out.println("Getting minTree...");
+           //graph1.minSPTree(startingVortex);
+            
+            System.out.println();
+            System.out.println("Starting vortex " + (startingVortex) + "\n");
+            System.out.println("Starting DFT for number:  " + startingVortex + "\n");
+            graph1.startDFT(startingVortex, chosenNumber);
+            
+            System.out.println();
+            System.out.println("Starting BFT for number: " +  startingVortex+ "\n");
+            graph1.startBFT(startingVortex, chosenNumber);
         }
         catch(Exception ex)
         {
