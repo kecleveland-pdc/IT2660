@@ -14,7 +14,8 @@ import java.util.ArrayList;
  */
 public class Graph {
     Node vertex[];
-    int edge[][]; //adjacent matrix array
+    int edge[][]; //adjacency matrix array
+    int tree[][]; //adjacency matrix array for spanning tree
     int max;
     int numberOfVertices;
     
@@ -66,7 +67,7 @@ public class Graph {
         }
     }
     
-    public void startBFT(int firstVertex)
+    public void startBFT(int firstVertex, int chosenNumber)
     {
         Queue<Integer> queue = new LinkedList<>();
         ArrayList<Integer> visited = new ArrayList<>();
@@ -92,7 +93,12 @@ public class Graph {
                 {
                     visited.add(nextNode); //visited
                     System.out.println("Vertex [" + nextNode + "] with number: " + vertex[nextNode].getNode()); //show visited
-                
+                    if(vertex[nextNode].getNode() == chosenNumber)
+                    {
+                        System.out.println("Found " + chosenNumber + " at Vertex[" + nextNode + "]. Exiting...");
+                        break;
+                    }
+                    
                     for(int i = 0; i < numberOfVertices; i++)
                     {
                         if(edge[nextNode][i] > 0 && !visited.contains(i)) //if edge and not visited 
@@ -110,7 +116,7 @@ public class Graph {
         
     }
     
-    public void startDFT(int firstVertex)
+    public void startDFT(int firstVertex, int chosenNumber)
     {
         int visited;
         Stack<Integer> stack = new Stack<>();
@@ -131,12 +137,43 @@ public class Graph {
             visited = stack.pop(); //returns object
             vertex[visited].visit(visited); //visit vertex (ie show)
             
+            //FIND THE NUMBER
+            if(vertex[visited].getNode() == chosenNumber)
+            {
+                System.out.println("Found " + chosenNumber + " at Vertex[" + visited + "]. Exiting...");
+                break;
+            }
+            
             for(int column = 0; column < numberOfVertices; column++)
             {
                 if(edge[visited][column] == 1 && !vertex[column].getPushed()) //is edge and not already visited
                  {
                     stack.push(column);
                     vertex[column].setPushed(true);
+                }
+            }
+        }
+    }
+    
+    public void dijkstra(int firstVertex)
+    {
+
+        //TO DO
+        int visited; 
+        Stack<Integer> stack = new Stack<>();
+        stack.push(firstVertex);
+       
+        while(!stack.empty())
+        {
+            visited = stack.pop(); //returns object
+            for(int column = 0; column < numberOfVertices; column++)
+            {
+                if(edge[visited][column] == 1 && !vertex[column].getPushed()) //is edge and not already visited
+                 {
+                    stack.push(column);
+                    vertex[column].setPushed(true);
+                    tree[visited][column] = 1;
+                    tree[column][visited] = 1;
                 }
             }
         }

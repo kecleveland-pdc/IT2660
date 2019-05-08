@@ -20,7 +20,9 @@ public class FinalProject {
 
         int MIN = 1;
         int MAX = 5;
-        int chosenVertex;
+        int startingVortex = MAX-1;
+        int chosenNumber;
+        int chosenVortex;
         
         Scanner scanUtil = new Scanner(System.in);
         Graph graph1 = new Graph(MAX);
@@ -28,7 +30,7 @@ public class FinalProject {
         System.out.println("--------------------------------------------------");
         System.out.println("Please a number to search for:");
             
-        chosenVertex = Integer.parseInt(scanUtil.nextLine());
+        chosenNumber = Integer.parseInt(scanUtil.nextLine());
 
         try
         {
@@ -59,12 +61,13 @@ public class FinalProject {
             graph1.insertEdge(4,3);
             
             System.out.println();
-            System.out.println("Starting DFT for number:  " + chosenVertex + "\n");
-            graph1.startDFT(chosenVertex);
+            System.out.println("Starting vortex " + (startingVortex));
+            System.out.println("Starting DFT for number:  " + startingVortex + "\n");
+            graph1.startDFT(startingVortex, chosenNumber);
             
             System.out.println();
-            System.out.println("Starting BFT for number: " +  chosenVertex+ "\n");
-            graph1.startBFT(chosenVertex);
+            System.out.println("Starting BFT for number: " +  startingVortex+ "\n");
+            graph1.startBFT(startingVortex, chosenNumber);
         }
         catch(Exception ex)
         {
