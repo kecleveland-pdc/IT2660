@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package finalproject;
-
+import java.util.Stack; //maybe replace with own stack 
 /**
  *
  * @author Keigh
@@ -59,6 +59,44 @@ public class Graph {
             if(edge[vertexNumber][column] == 1) //this is an edge
             {
                 System.out.println(vertexNumber + ", " + column);
+            }
+        }
+    }
+    
+    public void startBFT()
+    {
+        
+    }
+    
+    public void startDFT(int firstVertex)
+    {
+        int visited;
+        
+        Stack<Integer> stack = new Stack<>();
+        
+        for(int i = 0; i < numberOfVertices; i++)
+        {
+            if(vertex[i] != null)
+            {
+                vertex[i].setPushed(false); //basically nothing has been visited yet
+            }
+            
+            stack.push(firstVertex); //first visited
+            vertex[firstVertex].setPushed(true); //has been visited
+        }
+        
+        while(!stack.empty())
+        {
+            visited = stack.pop(); //returns object
+            vertex[visited].visit(); //visit vertex (ie show)
+            for(int column = 0; column < numberOfVertices; column++)
+            {
+                if(edge[visited][column] == 1 && !vertex[column].getPushed()) //not already visited
+                {
+                    stack.push(column);
+                    vertex[column].setPushed(true);
+                    System.out.println("Found [" + visited + "] [" + column + "]");
+                }
             }
         }
     }

@@ -11,6 +11,7 @@ package finalproject;
  */
 public class Node {
     private int _nodeValue;
+    boolean pushed; //needed to determine if pushing on stack
     
     Node(int value)
     {
@@ -36,5 +37,20 @@ public class Node {
     {
         Node clone = new Node(_nodeValue);
         return clone;
+    }
+    
+    public boolean getPushed()
+    {
+        return pushed;
+    }
+    
+    public void setPushed(boolean value)
+    {
+        pushed = value;
+    }
+    
+    public void visit()
+    {
+        System.out.println(this.getNode()); //TO DO MAKE BETTER REPRESENATION
     }
 }

@@ -44,14 +44,17 @@ public class FinalProject {
             graph1.insertEdge(1,3);
             graph1.insertEdge(2,4);
             
-            for(int i = 0; i < graph1.numberOfVertices; i++)
-            {
-                System.out.print("Vertex " + i + "'s node value is ");
-                graph1.showVertex(i);
-                System.out.println("This vertex has edges at: ");
-                graph1.showEdges(i);
-                System.out.println("\n");
-            }
+//            for(int i = 0; i < graph1.numberOfVertices; i++)
+//            {
+//                System.out.print("Vertex " + i + "'s node value is ");
+//                graph1.showVertex(i);
+//                System.out.println("This vertex has edges at: ");
+//                graph1.showEdges(i);
+//                System.out.println("\n");
+//            }
+            
+            System.out.println("Start DFT at Vertex 0\n");
+            graph1.startDFT(0);
         }
         catch(Exception ex)
         {
