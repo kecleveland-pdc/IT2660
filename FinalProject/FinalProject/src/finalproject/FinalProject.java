@@ -18,13 +18,13 @@ public class FinalProject {
      */
     public static void main(String[] args) {
 
-        int MIN = 0;
-        int MAX = 10;
+        int MIN = 1;
+        int MAX = 5;
         Graph graph1 = new Graph(MAX);
         
         try
         {
-            for(int i = MIN; i < MAX; i++)
+            for(int i = 0; i < MAX; i++)
             {
                 Node newNode = new Node(GenerateRandomNumber(MIN,MAX));
                 //build up graph ()
@@ -34,8 +34,23 @@ public class FinalProject {
                 }
                 else
                 {
-                    System.out.println("Inserted " + newNode.getNode());
+                    System.out.println("Inserted " + newNode.getNode() + " at Vertex " + i + "\n");
                 }      
+            }
+            
+            //insert non-random edges
+            graph1.insertEdge(0,1);
+            graph1.insertEdge(1,2);
+            graph1.insertEdge(1,3);
+            graph1.insertEdge(2,4);
+            
+            for(int i = 0; i < graph1.numberOfVertices; i++)
+            {
+                System.out.print("Vertex " + i + "'s node value is ");
+                graph1.showVertex(i);
+                System.out.println("This vertex has edges at: ");
+                graph1.showEdges(i);
+                System.out.println("\n");
             }
         }
         catch(Exception ex)

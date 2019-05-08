@@ -49,10 +49,10 @@ public class Graph {
     
     public void showVertex(int vertexNumber)
     {
-        System.out.println(vertex[vertexNumber]);
+        System.out.println(vertex[vertexNumber].getNode());
     }
     
-    public  void showEdges(int vertexNumber)
+    public void showEdges(int vertexNumber)
     {
         for(int column = 0; column < numberOfVertices; column++)
         {
@@ -62,4 +62,5 @@ public class Graph {
             }
         }
     }
+    
 }
