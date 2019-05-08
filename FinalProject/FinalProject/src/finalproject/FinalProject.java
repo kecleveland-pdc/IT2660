@@ -5,7 +5,7 @@
  */
 package finalproject;
 
-import java.util.Random;
+import java.util.*;
 
 /**
  *
@@ -20,9 +20,16 @@ public class FinalProject {
 
         int MIN = 1;
         int MAX = 5;
-        int chosenVertex = 3;
-        Graph graph1 = new Graph(MAX);
+        int chosenVertex;
         
+        Scanner scanUtil = new Scanner(System.in);
+        Graph graph1 = new Graph(MAX);
+        System.out.println("Search App");
+        System.out.println("--------------------------------------------------");
+        System.out.println("Please a number to search for:");
+            
+        chosenVertex = Integer.parseInt(scanUtil.nextLine());
+
         try
         {
             for(int i = 0; i < MAX; i++)
@@ -35,7 +42,7 @@ public class FinalProject {
                 }
                 else
                 {
-                    System.out.println("Inserted " + newNode.getNode() + " at Vertex " + i + "\n");
+                    System.out.println("Inserted Vertex[" + i + "] with number: " + newNode.getNode());
                 }      
             }
             
@@ -51,20 +58,13 @@ public class FinalProject {
             graph1.insertEdge(4,0);
             graph1.insertEdge(4,3);
             
-//            for(int i = 0; i < graph1.numberOfVertices; i++)
-//            {
-//                System.out.print("Vertex " + i + "'s node value is ");
-//                graph1.showVertex(i);
-//                System.out.println("This vertex has edges at: ");
-//                graph1.showEdges(i);
-//                System.out.println("\n");
-//            }
-            
-            System.out.println("Start DFT at Vertex " + chosenVertex + "\n");
+            System.out.println();
+            System.out.println("Starting DFT for number:  " + chosenVertex + "\n");
             graph1.startDFT(chosenVertex);
             
-//            System.out.println("Start BFT at Vertex 4\n");
-//            graph1.startBFT(4);
+            System.out.println();
+            System.out.println("Starting BFT for number: " +  chosenVertex+ "\n");
+            graph1.startBFT(chosenVertex);
         }
         catch(Exception ex)
         {
@@ -80,6 +80,5 @@ public class FinalProject {
         newRandom = r.nextInt((max - min) + 1) + min;
         return newRandom;
 
-    }
-    
+    } 
 }

@@ -91,7 +91,7 @@ public class Graph {
                 if(!visited.contains(nextNode))
                 {
                     visited.add(nextNode); //visited
-                    System.out.println("Vertex [" + nextNode + "]" ); //show visited
+                    System.out.println("Vertex [" + nextNode + "] with number: " + vertex[nextNode].getNode()); //show visited
                 
                     for(int i = 0; i < numberOfVertices; i++)
                     {

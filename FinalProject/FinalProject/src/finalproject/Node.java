@@ -5,6 +5,8 @@
  */
 package finalproject;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Keigh
@@ -53,6 +55,6 @@ public class Node {
     public void visit(int vertexNumber)
     {
         System.out.println("Vertex[" + vertexNumber + "] with number: " + this.getNode()); //TO DO MAKE BETTER REPRESENATION
-    } 
+    }
     
 }
