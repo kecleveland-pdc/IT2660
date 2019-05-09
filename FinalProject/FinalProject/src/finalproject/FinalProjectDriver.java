@@ -15,7 +15,7 @@ public class FinalProjectDriver {
     public static void main(String[] args) {
 
         int MIN = 1;
-        int MAX = 100;
+        int MAX = 1000;
         int MAXNUM = 3000;
         int startingVortex = MAX-1;
         int chosenNumber;
@@ -57,10 +57,10 @@ public class FinalProjectDriver {
             for(int i = 0; i < MAX; i ++)
             {
                 int toVertex = util.GenerateRandomNumber(1, 5);
-                int toVertexOffset = util.GenerateRandomNumber(1,(MAX/2));
                 for(int j = 0; j <= toVertex; j++)
                 {
-                    graph1.insertEdge(i, (toVertex + toVertexOffset));
+                    int random = util.GenerateRandomNumber(1, 99);
+                    graph1.insertEdge(i, random);
                 }
             }
             
