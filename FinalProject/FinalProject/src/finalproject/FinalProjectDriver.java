@@ -15,25 +15,30 @@ public class FinalProjectDriver {
     public static void main(String[] args) {
 
         int MIN = 1;
-        int MAX = 5;
+        int MAX = 10;
+        int MAXNUM = 300;
         int startingVortex = MAX-1;
         int chosenNumber;
-        int chosenVortex;
         
         Utility util = new Utility();
         Scanner scanUtil = new Scanner(System.in);
         Graph graph1 = new Graph(MAX);
         System.out.println("Search App");
+        
+        System.out.println("Drastically scaled down to 1000 nodes and 3,000 random\n" +
+                           "numbers. With currrent graph implementation, \n" +
+                           "this will not run with 100,000 nodes. Should probably have\n" +
+                           "used a different data structure to create the graph.");
+        
         System.out.println("--------------------------------------------------");
         System.out.println("Please a number to search for:");
-            
         chosenNumber = Integer.parseInt(scanUtil.nextLine());
 
         try
         {
             for(int i = 0; i < MAX; i++)
             {
-                Node newNode = new Node(util.GenerateRandomNumber(MIN,MAX));
+                Node newNode = new Node(util.GenerateRandomNumber(MIN,MAXNUM));
                 //build up graph ()
                 if(!graph1.insertVertex(i, newNode))
                 {
@@ -45,28 +50,23 @@ public class FinalProjectDriver {
                 }      
             }
             
-            //insert non-random adjacent edges
-            graph1.insertEdge(0,1,MAX);
-            graph1.insertEdge(0,3,MAX);
-            graph1.insertEdge(0,4,MAX);
-            graph1.insertEdge(1,0,MAX);
-            graph1.insertEdge(1,2,MAX);
-            graph1.insertEdge(1,3,MAX);
-            graph1.insertEdge(3,0,MAX);
-            graph1.insertEdge(3,4,MAX);
-            graph1.insertEdge(4,0,MAX);
-            graph1.insertEdge(4,3,MAX);
-            
-           //System.out.println("Getting minTree...");
-           //graph1.minSPTree(startingVortex);
+            //insert non-random adjacent edge
+            for(int i = 0; i < MAX; i ++)
+            {
+                    int toVertex = util.GenerateRandomNumber(1, 5);
+                    for(int j = 0; j < toVertex; j++)
+                    {
+                        graph1.insertEdge(i, toVertex);
+                    }
+            }
             
             System.out.println();
             System.out.println("Starting vortex " + (startingVortex) + "\n");
-            System.out.println("Starting DFT for number:  " + startingVortex + "\n");
+            System.out.println("Starting DFT for number:  " + chosenNumber + "\n");
             graph1.startDFT(startingVortex, chosenNumber);
             
             System.out.println();
-            System.out.println("Starting BFT for number: " +  startingVortex+ "\n");
+            System.out.println("Starting BFT for number: " +  chosenNumber+ "\n");
             graph1.startBFT(startingVortex, chosenNumber);
         }
         catch(Exception ex)

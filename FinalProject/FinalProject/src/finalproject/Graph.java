@@ -13,19 +13,26 @@ import java.util.ArrayList;
  * @author Keigh
  */
 public class Graph {
-    
+    //graph specific
     Node vertex[];
     Utility util;
     ArrayList<Integer> nodeArrList;
     
+  
     int edge[][]; //int edge[][]; //adjacency matrix array 2-dim array 
     int edgeWeight[][];
-    int spTree[][]; //adjacency matrix array for spanning tree
+    int spTree[][]; //adjacency matrix array for sp
     int mSPTree[][];
     int wMatrix[][]; //weight matrix
     
+    //tree arrays for dj
+    int[] verticesIncluded;
+    int[][] arrCopy; 
+    int[] minPathLengths;
+    
     int max;
     int numberOfVertices;
+    int numVerticesIncluded;
     
     public Graph(int vertexValue)
     {
@@ -51,11 +58,15 @@ public class Graph {
         return true;
     }
     
-    public boolean insertEdge(int fromVertex, int toVertex, int vertexValue)
+    public boolean insertEdge(int fromVertex, int toVertex)
     {
         if(vertex[fromVertex] == null || vertex[toVertex] == null)
         {
             return false; //does not exist
+        }
+        if( edgeWeight[fromVertex][toVertex] >= 1)
+        {
+            return false;
         }
         
         edge[fromVertex][toVertex] = 1; //eg. [0][1]
@@ -106,7 +117,7 @@ public class Graph {
                 if(!visited.contains(nextNode))
                 {
                     visited.add(nextNode); //visited
-                    System.out.println("Traveled to: Vertex [" + nextNode + "] with number: " + vertex[nextNode].getNode()); //show visited
+                    System.out.println("Traveled to: Vertex [" + nextNode + "] with value of: " + vertex[nextNode].getNode()); //show visited
                     if(vertex[nextNode].getNode() == chosenNumber)
                     {
                         System.out.println("Found " + chosenNumber + " at Vertex[" + nextNode + "]. Exiting...");
@@ -120,9 +131,13 @@ public class Graph {
                             queue.add(i); //add to queue 
                         }
                     }
-                }
+                } 
             }
-            System.out.println("Failed. Did not find " + chosenNumber + " with this search.");
+            
+            if(queue.isEmpty())
+            {
+                System.out.println("Failed. Did not find " + chosenNumber + " with this search.");
+            }
         }
         catch(Exception ex)
         {
@@ -167,9 +182,13 @@ public class Graph {
                         vertex[column].setPushed(true);
                     }
                 }
+                
             }
-        
-            System.out.println("Failed. Did not find " + chosenNumber + " with this search.");
+            
+            if(stack.isEmpty())
+            {
+                System.out.println("Failed. Did not find " + chosenNumber + " with this search.");
+            }
         }
         catch(Exception ex)
         {
@@ -177,53 +196,59 @@ public class Graph {
         }
     }
     
-    //creating the spanning tree
-    public void spTree(int firstVertex)
+    public int[][] dijkstra(int startingVertex)
     {
-        Stack<Integer> stack = new Stack<>();
-        int visited;
+        int numVericesIncluded;
+        int[] minPathLengths = new int[numberOfVertices];
+        int[] verticesIncluded = new int[numberOfVertices];
+        int[][] wMatrixCopy = wMatrix;
+        int noEdge = Integer.MAX_VALUE; //not sure
+        int noPath = Integer.MAX_VALUE;
+        int minPath;
         
-        stack.push(firstVertex);
-        vertex[firstVertex].setPushed(true);
+        int rowMin = 0; //edge row
+        int colMin = 0; //edge column
+        int weightMin = 0; //weighting factor
+        int minWeight = 0;
         
-        while(!stack.isEmpty())
+        verticesIncluded[0] = startingVertex; //start at starting vertex
+        numVericesIncluded = 1; //at least one has been added now
+        
+        for(int i = 0; i < numberOfVertices; i++)
         {
-            visited = stack.pop();
+            minPathLengths[i] = noPath; //initializes path lengths to impossible
+            wMatrixCopy[i][startingVertex] = noEdge; //gets rid of all edges
+        }
+        
+        minPathLengths[startingVertex] = 0;
+        
+        while(numVericesIncluded < numberOfVertices)
+        {
+           minPath =  findMinWeightEdge(numberOfVertices, wMatrixCopy, verticesIncluded, numVerticesIncluded, 
+                                        rowMin, colMin, weightMin);
             
-            for(int column = 0; column < numberOfVertices; column++)
+            for(int i = 0; i < numberOfVertices; i++)
             {
-                if(edge[visited][column] == 1 && !vertex[column].getPushed())
-                {
-                    stack.push(column);
-                    vertex[column].setPushed(true);
-                    spTree[visited][column] = 1;
-                    spTree[column][visited] = 1; //spanning tree
-                }
+                wMatrixCopy[i][colMin] = noEdge; //eliminate all other vertices
             }
+            
+            spTree[rowMin][colMin] = minWeight;
+            spTree[colMin][rowMin] = minWeight;
+            minPathLengths[colMin] = minPath;
+            verticesIncluded[numVerticesIncluded] = colMin;
+            
+            numVerticesIncluded++;
         }
         
+        return spTree;
     }
-
-    public void dijkstra(int firstVertex)
+     
+     //findMinDist distance method
+    public int findMinWeightEdge(int numberOfVertices, int [][] arrCopy,  int[] verticesIncluded, int numVerticesIncluded,
+                            int rowMin, int colMin, int weightMin)
     {
-        //TO DO
-        int visited; 
-        Stack<Integer> stack = new Stack<>();
-        stack.push(firstVertex);
-       
-        while(!stack.empty())
-        {
-            visited = stack.pop(); //returns object
-            for(int column = 0; column < numberOfVertices; column++)
-            {
-                if(edge[visited][column] == 1 && !vertex[column].getPushed()) //is edge and not already visited
-                 {
-                    stack.push(column);
-                    vertex[column].setPushed(true);
-                    spTree[visited][column] = 1;
-                    spTree[column][visited] = 1;
-                }
-            }
-        }
+        int index = -1; //fake index to show shouldn't be considered
+        return index;  //keep because this is final 
     }
+    
 }

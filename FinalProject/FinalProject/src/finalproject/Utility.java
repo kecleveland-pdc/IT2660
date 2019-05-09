@@ -28,9 +28,4 @@ public class Utility {
         return newRandom;
 
     } 
-    
-    public void outputSearchData(ArrayList arrList, int totalNumOfNodes, int length, int foundNode)
-    {
-        
-    }
 }
