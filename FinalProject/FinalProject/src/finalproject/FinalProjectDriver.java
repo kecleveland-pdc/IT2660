@@ -65,7 +65,6 @@ public class FinalProjectDriver {
             }
             
             System.out.println();
-            System.out.println("Starting vortex " + (startingVortex) + "\n");
             System.out.println("Starting DFT for number:  " + chosenNumber + "\n");
             graph1.startDFT(startingVortex, chosenNumber);
             
