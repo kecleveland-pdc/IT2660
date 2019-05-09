@@ -5,6 +5,8 @@
  */
 package studentlistingsapp;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Keigh
@@ -64,9 +66,33 @@ public class Node {
         return(_name.compareTo(targetKey));
 
    }
+   
+   public void input()
+    {
+        _name = JOptionPane.showInputDialog("Enter the student's name");
+        _address = JOptionPane.showInputDialog("Enter the student's address");
+        _number = JOptionPane.showInputDialog("Enter the student's number");     
+    }
+    
+    public void input(String targetKey)
+    {
+        _name = JOptionPane.showInputDialog("Please update " + targetKey + "'s name");
+        _address  = JOptionPane.showInputDialog("Please update " + targetKey + "'s student address.");
+        _number = JOptionPane.showInputDialog("Please update " + targetKey + "'s number");     
+    }
+     
        
     @Override
     public String toString(){
-        return "Student Name: " + _name + " StudentAddress: " + _address + " StudentNumber: " + _number;
+        return "\nStudent Name: " + _name 
+                + "\nStudent address: " + _address
+                + "\nStudent number: " + _number;       
     }
+    
+    public void showAll(){
+        System.out.println("\nStudent Name: " + _name 
+                + "\nStudent address: " + _address
+                + "\nStudent number: " + _number);       
+    }
+
 }
