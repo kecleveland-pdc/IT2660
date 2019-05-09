@@ -15,8 +15,8 @@ public class FinalProjectDriver {
     public static void main(String[] args) {
 
         int MIN = 1;
-        int MAX = 10;
-        int MAXNUM = 300;
+        int MAX = 100;
+        int MAXNUM = 3000;
         int startingVortex = MAX-1;
         int chosenNumber;
         
@@ -24,11 +24,14 @@ public class FinalProjectDriver {
         Scanner scanUtil = new Scanner(System.in);
         Graph graph1 = new Graph(MAX);
         System.out.println("Search App");
-        
-        System.out.println("Drastically scaled down to 1000 nodes and 3,000 random\n" +
+        System.out.println("--------------------------------------------------");
+        System.out.println("Notes: Drastically scaled down to 1000 nodes and 3,000 random\n" +
                            "numbers. With currrent graph implementation, \n" +
                            "this will not run with 100,000 nodes. Should probably have\n" +
-                           "used a different data structure to create the graph.");
+                           "used a different data structure to create the graph.\n" +
+                           "Not fully implemented: dijkstra Algorithm, as well as full\n" +
+                           "100,000 nodes and 300,000 random integers\n");
+                
         
         System.out.println("--------------------------------------------------");
         System.out.println("Please a number to search for:");
@@ -53,11 +56,12 @@ public class FinalProjectDriver {
             //insert non-random adjacent edge
             for(int i = 0; i < MAX; i ++)
             {
-                    int toVertex = util.GenerateRandomNumber(1, 5);
-                    for(int j = 0; j < toVertex; j++)
-                    {
-                        graph1.insertEdge(i, toVertex);
-                    }
+                int toVertex = util.GenerateRandomNumber(1, 5);
+                int toVertexOffset = util.GenerateRandomNumber(1,(MAX/2));
+                for(int j = 0; j <= toVertex; j++)
+                {
+                    graph1.insertEdge(i, (toVertex + toVertexOffset));
+                }
             }
             
             System.out.println();
