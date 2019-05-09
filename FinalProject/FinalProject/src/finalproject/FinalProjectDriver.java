@@ -41,7 +41,7 @@ public class FinalProjectDriver {
         {
             for(int i = 0; i < MAX; i++)
             {
-                Node newNode = new Node(util.GenerateRandomNumber(MIN,MAXNUM));
+                Node newNode = new Node(util.GenerateRandomNumber(MIN,MAX));
                 //build up graph ()
                 if(!graph1.insertVertex(i, newNode))
                 {
